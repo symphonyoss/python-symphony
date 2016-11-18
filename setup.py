@@ -32,6 +32,16 @@ setup(
     author='Matt Joyce',
     author_email='matt@nycresistor.com',
     url='https://github.com/symphonyoss/pyhton-symphony',
+    license='Apache 2.0',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: Apache 2.0 License',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+    ],
+    keywords='symphony chat api python module',
     # install dependencies from requirements.txt
     install_requires=reqs,
     packages=find_packages(),
