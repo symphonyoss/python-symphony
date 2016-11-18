@@ -7,8 +7,8 @@
 '''
 
 __author__ = 'Matt Joyce'
-__email__ = 'matt.joyce@symphony.com'
-__copyright__ = 'Copyright 2016, Symphony'
+__email__ = 'matt@nycresistor.com'
+__copyright__ = 'Copyright 2016 Symphony Software Foundation'
 
 import json
 import requests

@@ -9,8 +9,8 @@
 '''
 
 __author__ = 'Matt Joyce'
-__email__ = 'matt.joyce@symphony.com'
-__copyright__ = "Copyright 2016, Symphony"
+__email__ = 'matt@nycresistor.com'
+__copyright__ = 'Copyright 2016 Symphony Software Foundation'
 
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
@@ -29,9 +29,19 @@ setup(
     name='python-symphony',
     version='0.0.1',
     description='python module for symphony chat',
-    author='Engineering Services',
-    author_email='symphony-engservices@symphony.com',
-    url='https://symphony.engineering/',
+    author='Matt Joyce',
+    author_email='matt@nycresistor.com',
+    url='https://github.com/symphonyoss/pyhton-symphony',
+    license='Apache 2.0',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+    ],
+    keywords='symphony chat api python module',
     # install dependencies from requirements.txt
     install_requires=reqs,
     packages=find_packages(),
