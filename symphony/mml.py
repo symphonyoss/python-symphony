@@ -5,8 +5,8 @@
 '''
 
 __author__ = 'Matt Joyce'
-__email__ = 'matt.joyce@symphony.com'
-__copyright__ = 'Copyright 2016, Symphony'
+__email__ = 'matt@nycresistor.com'
+__copyright__ = 'Copyright 2016 Symphony Software Foundation'
 
 from bs4 import BeautifulSoup
 from datetime import datetime as date
