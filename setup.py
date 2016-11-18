@@ -10,7 +10,7 @@
 
 __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
-__copyright__ = 'Copyright 2016 Symphony Software Foundation'
+__copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
@@ -31,7 +31,7 @@ setup(
     description='python module for symphony chat',
     author='Matt Joyce',
     author_email='matt@nycresistor.com',
-    url='https://github.com/symphonyoss/pyhton-symphony',
+    url='https://github.com/symphonyoss/python-symphony',
     license='Apache 2.0',
     classifiers=[
         'Development Status :: 3 - Alpha',

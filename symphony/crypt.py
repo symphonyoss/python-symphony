@@ -7,7 +7,7 @@
 
 __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
-__copyright__ = 'Copyright 2016 Symphony Software Foundation'
+__copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import hashlib
 from OpenSSL import crypto
