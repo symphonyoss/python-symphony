@@ -1,0 +1,16 @@
+python-symphony
+Copyright 2016 Symphony Software Foundation
+
+This product includes software developed at the Symphony Software Foundation (http://symphony.foundation).
+
+The following dependencies are provided under other licenses. See project links for details.
+
+Required Modules
+
+pip - MIT
+requests - Apache 2 License
+pytz - MIT
+lxml - BSD license
+configparser - Python Software Foundation License
+bs4 - MIT
+pyopenssl - Apache 2 License

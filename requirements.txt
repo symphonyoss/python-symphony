@@ -1,0 +1,13 @@
+# This requirements file lists all third-party dependencies for this project.
+#
+
+# setup dependencies
+pip
+
+# app dependencies
+requests
+pytz
+lxml
+configparser
+bs4
+pyopenssl
