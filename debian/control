@@ -1,0 +1,16 @@
+Source: python-symphony
+Maintainer: Matt Joyce <matt@nycresistor.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 8), python, python-support, python-setuptools, python-pip, openssl-dev, libgnutls-dev
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.1
+
+Package: python-symphony
+Architecture: amd64
+Section: default
+Priority: extra
+Depends: python, python-support, openssl, libgnutls
+Homepage: http://github.com/symphony-oss/python-symphony/
+Description: python symphony module

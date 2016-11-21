@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+PACKAGE = python-symphony
+SRC_VERSION := $(shell python -B -c "import setup; print setup.PKG_DATA['version']")
+TARBALL = "$(PACKAGE)_$(SRC_VERSION).orig.tar.gz"
+.PHONY: get-orig-source
+
+%:
+	# Adding the required helpers
+	dh $@ --with python2
+
+override_dh_gencontrol:
+	dh_gencontrol --
+
+
+get-orig-source:
+	python setup.py sdist --formats=gztar
+	mv dist/*gz "../$(TARBALL)"
+	echo "  "$(TARBALL)" created"
+
+override_dh_clean:
+	dh_clean
+	rm -rf python-symphony.egg-info
