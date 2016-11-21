@@ -1,6 +1,9 @@
 A Symphony Python Module
 ========================
 
+.. image:: https://img.shields.io/pypi/v/python-symphony.svg
+      :target: https://pypi.python.org/pypi/python-symphony/
+
 An open source python module that exists as an aid to the `Symphony Chat
 Securce Communications Application <https://symphony.com/>`_.
 
@@ -19,9 +22,6 @@ Typical contents for this file would include an overview of the project, basic
 usage examples, etc. Generally, including the project changelog in here is not
 a good idea, although a simple "What's New" section for the most recent version
 may be appropriate.
-
-.. image:: https://img.shields.io/pypi/v/python-symphony.svg
-   :target: https://pypi.python.org/pypi/python-symphony/
 
 ----
 
