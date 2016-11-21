@@ -23,3 +23,7 @@ may be appropriate.
 .. image:: https://img.shields.io/pypi/v/python-symphony.svg
    :target: https://pypi.python.org/pypi/python-symphony/
 
+----
+
+.. _hacking guide: HACKING.rst
+Check out the `hacking guide`_.
