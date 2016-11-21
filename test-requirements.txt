@@ -4,4 +4,4 @@
 # unit test dependencies
 tox
 flake8
-pep8
+pycodestyle
