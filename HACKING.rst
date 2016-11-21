@@ -2,7 +2,7 @@
 Hacking Style Guide
 ===================
 
-The Zen of Python::
+The Zen of Python
 -----------------
 
 PEP 20::
@@ -28,9 +28,8 @@ PEP 20::
         Namespaces are one honking great idea -- let's do more of those!
             -- https://www.python.org/dev/peps/pep-0020/ 
                                                              
-Sample
-~~~~~~
-::
+easter egg::
+
         #!/usr/bin/env python
         import this
  
@@ -40,17 +39,17 @@ General Governance
 Imports
 ~~~~~~~
 
- *  Do not import objects, only modules (*)
- *  Do not import more than one module per line (*)
- *  Do not use wildcard * import (*)
- *  Do not make relative imports
+* Do not import objects, only modules (*)
+* Do not import more than one module per line (*)
+* Do not use wildcard * import (*)
+* Do not make relative imports
  (*) exceptions are:
- *  function imports from i18n module
+* function imports from i18n module
 
 Dictionaries/Lists
 ~~~~~~~~~~~~~~~~~~
 
- *  If a dictionary (dict) or list object is longer than 80 characters, its items should be split with newlines. Embedded iterables should have their items indented. Additionally, the last item in the dictionary should have a trailing comma. This increases readability and simplifies future diffs.
+* If a dictionary (dict) or list object is longer than 80 characters, its items should be split with newlines. Embedded iterables should have their items indented. Additionally, the last item in the dictionary should have a trailing comma. This increases readability and simplifies future diffs.
 
 Calling Methods
 ~~~~~~~~~~~~~~~
