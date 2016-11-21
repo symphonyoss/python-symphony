@@ -25,5 +25,5 @@ may be appropriate.
 
 ----
 
+.. _hacking guide: HACKING.rst
 Check out the `hacking guide`_.
-.. _hacking guide: HACKING.rst 
