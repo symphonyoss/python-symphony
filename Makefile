@@ -50,19 +50,19 @@ ifeq ($(UNAME), Linux)
 # build specific subdir
 $(SUBDIRS): venv
 	# run code_quality tests
-	./tests/code_quality.sh $(@)
+	# tox
 	# build the python app
 	cd $(@); $(PYTHON) setup.py install --verbose
 	# set the venv relocatable / helps with portability
 	virtualenv --relocatable $(ROOT_DIR)/venv
 	# change activate path to /opt path
-	sed -i -e 's/^VIRTUAL_ENV.*/directory_bin="\/opt\/$(@)\/bin\/"\n\
-	directory_env="\/opt\/$(@)\/"\n\
-	VIRTUAL_ENV="\/opt\/$(@)\/venv\/"\n/' venv/bin/activate
+	sed -i -e 's/^VIRTUAL_ENV.*/directory_bin="\/opt\/$(shell basename $(CURDIR))\/bin\/"\n\
+	directory_env="\/opt\/$(shell basename $(CURDIR)))\/"\n\
+	VIRTUAL_ENV="\/opt\/$(shell basename $(CURDIR))\/venv\/"\n/' venv/bin/activate
 	# set the app version var
 	$(eval APP_VERSION := $(shell cat $(@)/setup.py | grep version | cut -d \' -f2 ))
 	# build RPM
-	fpm -s dir -t rpm --rpm-os linux --name symphony-es-$(@) --version $(APP_VERSION) --iteration 1 --after-install ./$(@)/post-install/run.sh --rpm-auto-add-directories --description "$(@)" ./venv/=/opt/$(@)/venv/ ./$(@)/sbin/=/usr/sbin/ ./$(@)/post-install/=/opt/$(@)/post-install/
+	fpm -s dir -t rpm --rpm-os linux --name symphony-es-$(shell basename $(CURDIR)) --version $(APP_VERSION) --iteration 1 --after-install ./post-install/run.sh --rpm-auto-add-directories --description "$(shell basename $(CURDIR))" ./venv/=/opt/$(shell basename $(CURDIR))/venv/ ./post-install/=/opt/$(@)/post-install/
 	# put the rpm in a build dir
 	test -d $(ROOT_DIR)/build || mkdir $(ROOT_DIR)/build
 	mv *.rpm build/
