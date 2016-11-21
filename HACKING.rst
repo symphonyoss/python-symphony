@@ -4,7 +4,7 @@ Hacking Style Guide
 
 The Zen of Python
 -----------------
-
+::
     Beautiful is better than ugly.
     Explicit is better than implicit.
     Simple is better than complex.
@@ -91,27 +91,27 @@ Docstrings
 Sample
 ~~~~~~
 ref ( http://stackoverflow.com/questions/1523427/what-is-the-common-header-format-of-python-files ):
-Example File Header
-#!/usr/bin/env python
- 
-'''
-  Execution:
-    pod_request.py --<long flag> -<short flag> <some arguments>
-  Purpose:
-    Process PodRequestData files (JSON), validate, allocate and 
-    store info on data model (database).
-'''
-  
-__author__ = 'Matt Joyce'
-__email__ = 'matt@nycresistor.com'
-__copyright__   = "Copyright 2016, Example Co."
- 
+Example File Header::
+        #!/usr/bin/env python
+        
+        '''
+        Execution:
+             pod_request.py --<long flag> -<short flag> <some arguments>
+        Purpose:
+             Process PodRequestData files (JSON), validate, allocate and 
+        store info on data model (database).
+        '''
+        
+        __author__ = 'Matt Joyce'
+        __email__ = 'matt@nycresistor.com'
+        __copyright__   = "Copyright 2016, Example Co."
+        
         import os
         import sys
- 
+        
         from symphony import Config
- 
- 
+        
+        
         if __name__ == "__main__":
                 sym = Config(config)
  
