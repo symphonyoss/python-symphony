@@ -43,7 +43,7 @@ Imports
 * Do not import more than one module per line (*)
 * Do not use wildcard * import (*)
 * Do not make relative imports
- (*) exceptions are:
+(*) exceptions are:
 * function imports from i18n module
 
 Dictionaries/Lists
@@ -54,29 +54,29 @@ Dictionaries/Lists
 Calling Methods
 ~~~~~~~~~~~~~~~
 
- *  Calls to methods 80 characters or longer should format each argument with newlines. This is not a requirement, but a guideline.
+* Calls to methods 80 characters or longer should format each argument with newlines. This is not a requirement, but a guideline.
 
 Other
 ~~~~~
 
- *  Use only UNIX style newlines (\n), not Windows style (\r\n)
- *  It is preferred to wrap long lines in parentheses and not a backslash for line continuation.
- *  Do not write except:, use except Exception: at the very least. When catching an exception you should be as specific so you don’t mistakenly catch unexpected exceptions.
- *  Don’t put vim configuration in source files (off by default).
- *  Do not shadow a built-in or reserved word. Shadowing built -in or reserved words makes the code harder to understand.
+* Use only UNIX style newlines (\n), not Windows style (\r\n)
+* It is preferred to wrap long lines in parentheses and not a backslash for line continuation.
+* Do not write except:, use except Exception: at the very least. When catching an exception you should be as specific so you don’t mistakenly catch unexpected exceptions.
+* Don’t put vim configuration in source files (off by default).
+* Do not shadow a built-in or reserved word. Shadowing built -in or reserved words makes the code harder to understand.
 
 PEP 8
 ~~~~~
 
- *  Step 1: Read pep8
- *  Step 2: Read pep8 again
- *  Step 3: Read on
+*  Step 1: Read pep8
+*  Step 2: Read pep8 again
+*  Step 3: Read on
 
 All python code should first and foremost follow PEP8 guidelines.
 
- *  https://www.python.org/dev/peps/pep-0008/ ( read more here )
- *  https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code ( read more here as well )
- *  http://docs.python-guide.org/en/latest/writing/style/ ( also worth reading )
+*  https://www.python.org/dev/peps/pep-0008/ ( read more here )
+*  https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code ( read more here as well )
+*  http://docs.python-guide.org/en/latest/writing/style/ ( also worth reading )
 
 File Headers
 ~~~~~~~~~~~~
@@ -85,10 +85,10 @@ Every class class should have a header comment section, describing the purpose o
 
 Docstrings
 ~~~~~~~~~~
- *  Docstrings should not start with a space.
- *  Multi line docstrings should end on a new line.
- *  Multi line docstrings should start without a leading new line.
- *  Multi line docstrings should start with a one line summary followed by an empty line.
+*  Docstrings should not start with a space.
+*  Multi line docstrings should end on a new line.
+*  Multi line docstrings should start without a leading new line.
+*  Multi line docstrings should start with a one line summary followed by an empty line.
 
 Sample
 ~~~~~~
@@ -119,41 +119,41 @@ Example File Header::
  
 Comments
 ~~~~~~~~
- *  Each public api should have clear comments on how it should be used and when.
- *  Each private api should have comments that describe implementation.
+*  Each public api should have clear comments on how it should be used and when.
+*  Each private api should have comments that describe implementation.
 
  
 Commit Messages
 ~~~~~~~~~~~~~~~
- *  Using a common format for commit messages will help keep our git history readable.
- *  Tag all commits with a corresponding JIRA ticket, where applicable, followed by a SHORT description of the commit. 
+*  Using a common format for commit messages will help keep our git history readable.
+*  Tag all commits with a corresponding JIRA ticket, where applicable, followed by a SHORT description of the commit. 
 
 Unit Testing
 ~~~~~~~~~~~~
- *  unittest2 is the python2.7 defacto standard for unittesting modules.
- *  we use tox to kick off tests, and mock for mocking up rest api method calls
- *  For every new feature, unit tests should be created that both test and (implicitly) document the usage of said feature. If submitting a patch for a bug that had no unit test, a new passing unit test should be added. If a submitted bug fix does have a unit test, be sure to add a new one that fails without the patch and passes with the patch.
+*  unittest2 is the python2.7 defacto standard for unittesting modules.
+*  we use tox to kick off tests, and mock for mocking up rest api method calls
+*  For every new feature, unit tests should be created that both test and (implicitly) document the usage of said feature. If submitting a patch for a bug that had no unit test, a new passing unit test should be added. If a submitted bug fix does have a unit test, be sure to add a new one that fails without the patch and passes with the patch.
 
 Unit Tests and assertRaises
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  A properly written test asserts that particular behavior occurs. This can be a success condition or a failure condition, including an exception. When asserting that a particular exception is raised, the most specific exception possible should be used.
- *  Testing for Exception being raised is almost always a mistake since it will match (almost) every exception, even those unrelated to the exception intended to be tested.
- *  This applies to catching exceptions manually with a try/except block, or usingassertRaises().
+*  A properly written test asserts that particular behavior occurs. This can be a success condition or a failure condition, including an exception. When asserting that a particular exception is raised, the most specific exception possible should be used.
+*  Testing for Exception being raised is almost always a mistake since it will match (almost) every exception, even those unrelated to the exception intended to be tested.
+*  This applies to catching exceptions manually with a try/except block, or usingassertRaises().
   - https://pypi.python.org/pypi/unittest2 ( Read More )
   - http://www.drdobbs.com/testing/unit-testing-with-python/240165163 ( Read even more )
- *  please unittest, EVERYTHING.  If you see something not unit tested in a pull request, ask for unit tests before merging it.  integrate the unittest creation process into your prototyping of methods and functions, for the best experience in development.
+*  please unittest, EVERYTHING.  If you see something not unit tested in a pull request, ask for unit tests before merging it.  integrate the unittest creation process into your prototyping of methods and functions, for the best experience in development.
  
 Input Validation
 ~~~~~~~~~~~~~~~~
- *  See PEP 8.
- *  See Unit Testing.
- *  assert what's absolutely essential.
- *  All input should be validated, and tested in unit tests, and functional tests BEFORE code is merged.
+*  See PEP 8.
+*  See Unit Testing.
+*  assert what's absolutely essential.
+*  All input should be validated, and tested in unit tests, and functional tests BEFORE code is merged.
 
 Error Handling
 ~~~~~~~~~~~~~~
-  - https://docs.python.org/2.7/tutorial/errors.html ( Read More )
+- https://docs.python.org/2.7/tutorial/errors.html ( Read More )
 
 Logging
 ~~~~~~~
-  - http://docs.python-guide.org/en/latest/writing/logging/ ( Read More )
+- http://docs.python-guide.org/en/latest/writing/logging/ ( Read More )
