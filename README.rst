@@ -4,24 +4,39 @@ A Symphony Python Module
 .. image:: https://img.shields.io/pypi/v/python-symphony.svg
       :target: https://pypi.python.org/pypi/python-symphony/
 
-An open source python module that exists as an aid to the `Symphony Chat
-Securce Communications Application <https://symphony.com/>`_.
+The Symphony python client module provides a real-time wrapper around the Symphony REST API's to simplify the creation of chat sessions, room access, presence, messaging and more... The client provides a set of logical services representing supported features of the Symphony platform. Services support real-time events through feature based listeners and communication objects. Access is not limited to the services as all underlying Symphony client implementations are exposed for advanced use or creation of your own service.
 
-This module provides basic methods for interacting with the Agent API.
+Or it will once it's completely finished =P
 
-----
+Features
+--------
 
-This is the README file for the project.
+* Parsing of p12 certificates
+* Authentication
+* Sending Messages
+* Receiving Messages
+* MessageML Parsing ( basic functionality )
+* User Lookup
 
-The file should use UTF-8 encoding and be written using ReStructured Text. It
-will be used to generate the project webpage on PyPI and will be displayed as
-the project homepage on common code-hosting services, and should be written for
-that purpose.
+Requirements
+------------
 
-Typical contents for this file would include an overview of the project, basic
-usage examples, etc. Generally, including the project changelog in here is not
-a good idea, although a simple "What's New" section for the most recent version
-may be appropriate.
+python-pip
+openssl-dev
+libgnutls-dev
+
+Dependencies
+------------
+
+This project uses the following libraries:
+
+* pip
+* requests
+* pytz
+* lxml
+* configparser
+* bs4
+* pyopenssl
 
 ----
 
