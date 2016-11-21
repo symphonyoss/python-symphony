@@ -20,4 +20,6 @@ usage examples, etc. Generally, including the project changelog in here is not
 a good idea, although a simple "What's New" section for the most recent version
 may be appropriate.
 
-[![pypi package](https://img.shields.io/pypi/v/python-symphony.svg)](https://pypi.python.org/pypi/python-symphony/)
+.. image:: https://img.shields.io/pypi/v/python-symphony.svgd
+   :target: https://pypi.python.org/pypi/python-symphony/
+
