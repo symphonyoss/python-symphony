@@ -45,6 +45,7 @@ clean: destroyvenv
 	rm -f pylint_report.txt
 	rm -f nosetests.xml
 	unset APP_VERSION
+
 # only build on Linux
 ifeq ($(UNAME), Linux)
 # build specific subdir
@@ -62,7 +63,7 @@ $(SUBDIRS): venv
 	# set the app version var
 	$(eval APP_VERSION := $(shell cat $(@)/setup.py | grep version | cut -d \' -f2 ))
 	# build RPM
-	fpm -s dir -t rpm --rpm-os linux --name symphony-es-$(shell basename $(CURDIR)) --version $(APP_VERSION) --iteration 1 --after-install ./post-install/run.sh --rpm-auto-add-directories --description "$(shell basename $(CURDIR))" ./venv/=/opt/$(shell basename $(CURDIR))/venv/ ./post-install/=/opt/$(@)/post-install/
+	fpm -s dir -t rpm --rpm-os linux --name symphony-es-$(shell basename $(CURDIR)) --version $(APP_VERSION) --iteration 1 --after-install ./post-install/run.sh --rpm-auto-add-directories --description "$(shell basename $(CURDIR))" ./venv/=/opt/$(shell basename $(CURDIR))/venv/ ./post-install/=/opt/$(shell basename $(CURDIR))/post-install/
 	# put the rpm in a build dir
 	test -d $(ROOT_DIR)/build || mkdir $(ROOT_DIR)/build
 	mv *.rpm build/
