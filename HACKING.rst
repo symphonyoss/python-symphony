@@ -98,10 +98,9 @@ Example File Header::
         
         '''
         Execution:
-             pod_request.py --<long flag> -<short flag> <some arguments>
+             sample.py --<long flag> -<short flag> <some arguments>
         Purpose:
-             Process PodRequestData files (JSON), validate, allocate and 
-        store info on data model (database).
+             process does something
         '''
         
         __author__ = 'Matt Joyce'
