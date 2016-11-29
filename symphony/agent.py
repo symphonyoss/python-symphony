@@ -13,7 +13,7 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 import ast
 import json
 import requests
-
+import unicodedata
 
 class Agent():
 
@@ -23,6 +23,9 @@ class Agent():
         self.__key__ = key
         self.__session__ = session
         self.__keymngr__ = keymngr
+
+    def remove_control_characters(self, s):
+        return "".join(ch for ch in s if unicodedata.category(ch)[0]!="C")
 
     def test_echo(self, test_string):
         ''' echo test '''
@@ -94,6 +97,7 @@ class Agent():
 
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
+        message = self.remove_control_characters(message)
         headers = {'content-type': 'application/json',
                    'sessionToken': self.__session__,
                    'keyManagerToken': self.__keymngr__}
