@@ -15,6 +15,7 @@ import json
 import requests
 import unicodedata
 
+
 class Agent():
 
     def __init__(self, url, crt, key, session, keymngr):
@@ -25,7 +26,7 @@ class Agent():
         self.__keymngr__ = keymngr
 
     def remove_control_characters(self, s):
-        return "".join(ch for ch in s if unicodedata.category(ch)[0]!="C")
+        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 
     def test_echo(self, test_string):
         ''' echo test '''

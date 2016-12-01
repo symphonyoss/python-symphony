@@ -105,3 +105,24 @@ class Pod():
 
         # return the token
         return response.status_code, response.text
+
+    def search_user(self, search_str, search_filter, local):
+        ''' add a user to a stream '''
+        headers = {'Content-Type': 'application/json',
+                   'sessionToken': self.__session__}
+
+        data = '{
+                    "query": "%s",
+                    "filters": %s
+                }' % (search_str, search_filter)
+
+        try:
+            response = requests.post(self.__url__ + 'pod/v1/user/search?local=' + local,
+                                     headers=headers,
+                                     data=data,
+                                     cert=(self.__crt__, self.__key__),
+                                     verify=True)
+        except requests.exceptions.RequestException as e:
+            print e
+            return None
+        return response.status_code, response.text
