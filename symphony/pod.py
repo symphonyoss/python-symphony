@@ -112,15 +112,10 @@ class Pod():
                    'sessionToken': self.__session__}
 
         data = '{
-                    "query": "john doe",
-                    "filters": {
-                        "title": "Portfolio Manager",
-                        "location": "New York",
-                        "company": "Gotham"
-                    }
-                }'  
+                    "query": "%s",
+                    "filters": %s
+                }' % (search_str, search_filter)
 
-        # HTTP POST query to keymanager authenticate API
         try:
             response = requests.post(self.__url__ + 'pod/v1/user/search?local=' + local,
                                      headers=headers,
@@ -130,5 +125,4 @@ class Pod():
         except requests.exceptions.RequestException as e:
             print e
             return None
-        # return the token
         return response.status_code, response.text
