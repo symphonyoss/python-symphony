@@ -111,9 +111,9 @@ class Pod():
         headers = {'Content-Type': 'application/json',
                    'sessionToken': self.__session__}
 
-        data = '{
-                    "query": "%s",
-                    "filters": %s
+        data = '{ \
+                    "query": "%s", \
+                    "filters": %s \
                 }' % (search_str, search_filter)
 
         try:
