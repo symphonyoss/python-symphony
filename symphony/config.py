@@ -56,9 +56,12 @@ class Config:
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
             agent = symphony.Agent(symphony_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            # instantiate pod methods
+            pod = symphony.Pod(symphony_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+
             logging.info("INSTANTIATION ( all objects successful)")
         except Exception, err:
             logging.error("Failed to authenticate and initialize: %s" % err)
             return 'you', 'have', 'failed'
         # return references and such
-        return agent, symphony_sid
+        return agent, pod, symphony_sid
