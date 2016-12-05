@@ -102,10 +102,11 @@ def search_user(self, search_str, search_filter, local):
     headers = {'Content-Type': 'application/json',
                'sessionToken': self.__session__}
 
-    data = '{
-                "query": "%s",
-                "filters": %s
-            }' % (search_str, search_filter)
+    data = {
+                "query": search_str,
+                "filters": search_filter
+           }
+    data = json.dumps(data)
 
     try:
         response = requests.post(self.__url__ + 'pod/v1/user/search?local=' + local,

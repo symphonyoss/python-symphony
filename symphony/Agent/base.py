@@ -10,12 +10,6 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import ast
-import json
-import requests
-import unicodedata
-
-
 def remove_control_characters(self, s):
     return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 

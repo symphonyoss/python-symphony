@@ -17,7 +17,11 @@ import unicodedata
 
 
 class Agent():
-    from base import base 
+    from base import remove_control_characters
+    from base import test_echo
+    from base import create_datafeed
+    from base import read_datafeed
+    from base import send_message
 
     def __init__(self, url, crt, key, session, keymngr):
         self.__url__ = url
