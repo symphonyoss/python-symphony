@@ -15,7 +15,7 @@ import requests
 
 
 class Pod():
-    from pod import pod
+    from base import base 
     from connections import connections   
    
     def __init__(self, url, crt, key, session, keymngr):
