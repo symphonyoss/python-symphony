@@ -10,9 +10,6 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import json
-import requests
-
 
 class Pod():
     from base import get_userid_by_email
