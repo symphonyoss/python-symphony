@@ -16,16 +16,17 @@ import requests
 
 class Auth():
 
-    def __init__(self, url, crt, key):
+    def __init__(self, keyurl, sessionurl, crt, key):
         self.__crt__ = crt
         self.__key__ = key
-        self.__url__ = url
+        self.__key_url__ = keyurl
+        self.__session_url__ = sessionurl
 
     def get_session_token(self):
         ''' get session token '''
         # HTTP POST query to session authenticate API
         try:
-            response = requests.post(self.__url__ + 'sessionauth/v1/authenticate',
+            response = requests.post(self.__session_url__ + 'sessionauth/v1/authenticate',
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as e:
             print e
@@ -44,7 +45,7 @@ class Auth():
         ''' get keymanager token '''
         # HTTP POST query to keymanager authenticate API
         try:
-            response = requests.post(self.__url__ + 'keyauth/v1/authenticate',
+            response = requests.post(self.__key_url__ + 'keyauth/v1/authenticate',
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as e:
             print e

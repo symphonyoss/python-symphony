@@ -40,14 +40,17 @@ class Config:
         # Connect to Symphony
         symphony_p12 = settings.get('symphony', 'symphony_p12')
         symphony_pwd = settings.get('symphony', 'symphony_pwd')
-        symphony_uri = settings.get('symphony', 'symphony_uri')
+        symphony_pod_uri = settings.get('symphony', 'symphony_pod_uri')
+        symphony_keymanager_uri = settings.get('symphony', 'symphony_keymanager_uri')
+        symphony_agent_uri = settings.get('symphony', 'symphony_agent_uri')
+        symphony_sessionauth_uri = settings.get('symphony', 'symphony_sessionauth_uri')
         symphony_sid = settings.get('symphony', 'symphony_sid')
         crypt = symphony.Crypt(symphony_p12, symphony_pwd)
         symphony_crt, symphony_key = crypt.p12parse()
 
         try:
             # instantiate auth methods
-            auth = symphony.Auth(symphony_uri, symphony_crt, symphony_key)
+            auth = symphony.Auth(symphony_sessionauth_uri, symphony_keymanager_uri, symphony_crt, symphony_key)
             # get session token
             session_token = auth.get_session_token()
             logging.info("AUTH ( session token ): %s" % session_token)
@@ -55,9 +58,9 @@ class Config:
             keymngr_token = auth.get_keymanager_token()
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
-            agent = symphony.Agent(symphony_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            agent = symphony.Agent(symphony_agent_uri, symphony_crt, symphony_key, session_token, keymngr_token)
             # instantiate pod methods
-            pod = symphony.Pod(symphony_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            pod = symphony.Pod(symphony_pod_uri, symphony_crt, symphony_key, session_token, keymngr_token)
 
             logging.info("INSTANTIATION ( all objects successful)")
         except Exception, err:
