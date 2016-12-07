@@ -27,7 +27,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
     name='python-symphony',
-    version='0.0.11',
+    version='0.0.12',
     description='python module for symphony chat',
     author='Matt Joyce',
     author_email='matt@nycresistor.com',
