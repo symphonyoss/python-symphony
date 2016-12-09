@@ -5,16 +5,13 @@ A Symphony Python Module
       :target: https://pypi.python.org/pypi/python-symphony/
 
 .. image:: https://img.shields.io/pypi/pyversions/python-symphony.svg
-       :target: https://pypi.python.org/pypi/python-symphony/
-    :alt: Python Versions
+      :target: https://pypi.python.org/pypi/python-symphony/
 
 .. image:: https://img.shields.io/pypi/format/python-symphony.svg
-       :target: https://pypi.python.org/pypi/python-symphony/
-    :alt: Format
+      :target: https://pypi.python.org/pypi/python-symphony/
 
 .. image:: https://img.shields.io/badge/license-Apache%202-blue.svg
-       :target: https://github.com/symphonyoss/python-symphony/blob/master/LICENSE
-    :alt: License
+      :target: https://github.com/symphonyoss/python-symphony/blob/master/LICENSE
 
 
 The Symphony python client module provides a real-time wrapper around the Symphony REST API's to simplify the creation of chat sessions, room access, presence, messaging and more... The client provides a set of logical services representing supported features of the Symphony platform. Services support real-time events through feature based listeners and communication objects. Access is not limited to the services as all underlying Symphony client implementations are exposed for advanced use or creation of your own service.
