@@ -19,6 +19,7 @@ import unicodedata
 def remove_control_characters(self, s):
     return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 
+
 def test_echo(self, test_string):
     ''' echo test '''
 
@@ -43,6 +44,7 @@ def test_echo(self, test_string):
     # return the token
     return status_code
 
+
 def create_datafeed(self):
     ''' create datafeed '''
     # https://your-pod.symphony.com/:8444/agent/v1/datafeed/create
@@ -63,6 +65,7 @@ def create_datafeed(self):
     datafeed = json.loads(response.text)
     # return the token
     return datafeed['id']
+
 
 def read_datafeed(self, streamid):
     ''' get datafeed '''
@@ -86,6 +89,7 @@ def read_datafeed(self, streamid):
         datafeed = ast.literal_eval(datafeed)
     # return the token
     return datafeed, datastat
+
 
 def send_message(self, threadid, msgFormat, message):
     ''' send message to threadid/stream '''

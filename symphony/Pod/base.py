@@ -17,7 +17,7 @@ import requests
 def get_userid_by_email(self, email):
     ''' get userid by email '''
     headers = {'content-type': 'application/json',
-                   'sessionToken': self.__session__}
+               'sessionToken': self.__session__}
 
     # HTTP POST query to keymanager authenticate API
     try:
@@ -32,6 +32,7 @@ def get_userid_by_email(self, email):
     userid = json.loads(response.text)
     # return the token
     return userid['id']
+
 
 def get_user_id_by_user(self, username):
     ''' get user id by username '''
@@ -53,6 +54,7 @@ def get_user_id_by_user(self, username):
     # return the token
     return string['id']
 
+
 def adduser_to_stream(self, streamid, userid):
     ''' add a user to a stream '''
     headers = {'Content-Type': 'application/json',
@@ -73,6 +75,7 @@ def adduser_to_stream(self, streamid, userid):
         return None
     # return the token
     return response.status_code, response.text
+
 
 def user_feature_update(self, userid):
     ''' update features by user id '''
@@ -97,15 +100,16 @@ def user_feature_update(self, userid):
     # return the token
     return response.status_code, response.text
 
+
 def search_user(self, search_str, search_filter, local):
     ''' add a user to a stream '''
     headers = {'Content-Type': 'application/json',
                'sessionToken': self.__session__}
 
     data = {
-                "query": search_str,
-                "filters": search_filter
-           }
+        "query": search_str,
+        "filters": search_filter
+    }
     data = json.dumps(data)
 
     try:
