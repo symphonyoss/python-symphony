@@ -32,6 +32,7 @@ def list_connections(self):
     # return the token
     return connections
 
+
 def connection_status(self, userid):
     ''' get connection status '''
     headers = {'content-type': 'application/json',
@@ -49,6 +50,7 @@ def connection_status(self, userid):
     connection_status = json.loads(response.text)
     # return the token
     return connection_status
+
 
 def accept_connection(self, userid):
     ''' accept connection request '''
@@ -69,6 +71,7 @@ def accept_connection(self, userid):
         return None
     # return the token
     return response.status_code, response.text
+
 
 def create_connection(self, userid):
     ''' create connection '''

@@ -5,3 +5,4 @@
 tox
 flake8
 pycodestyle
+bandit
