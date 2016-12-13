@@ -21,9 +21,6 @@ class Config:
 
     def __init__(self, config):
         ''' command line argument parsing '''
-        opts, args = getopt.getopt(sys.argv[1:], 'hc:t:vV')
-        self.opts = dict(opts)
-        self.args = args
         self.__config__ = config
 
     def connect(self):
