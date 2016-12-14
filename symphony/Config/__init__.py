@@ -26,12 +26,15 @@ class Config:
     def connect(self):
         ''' instantiate objects / parse config file '''
         # open config file for parsing
-        settings = configparser.ConfigParser()
-        settings._interpolation = configparser.ExtendedInterpolation()
+        try:
+            settings = configparser.ConfigParser()
+            settings._interpolation = configparser.ExtendedInterpolation()
+        except Exception as err:
+            logging.error("Failed to instantiate config parser exception: %s" % err)
         try:
             settings.read(self.__config__)
         except Exception as err:
-            logging.error("Failed to load exception: %s" % err)
+            logging.error("Failed to read config file exception: %s" % err)
             sys.exit(2)
 
         # Connect to Symphony

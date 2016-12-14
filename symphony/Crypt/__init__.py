@@ -21,7 +21,7 @@ class Crypt():
 
     def write_tmpfile(self, string):
         path = '/tmp/' + hashlib.sha224(string).hexdigest()
-        filehandle = open(path, 'w')
+        filehandle = open(path, 'wb')
         filehandle.write(string)
         filehandle.close
         return path
