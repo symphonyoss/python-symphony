@@ -26,8 +26,7 @@ def get_userid_by_email(self, email):
                                 cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     userid = json.loads(response.text)
     # return the token
@@ -46,8 +45,7 @@ def get_user_id_by_user(self, username):
                                 cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
 
     # load json response as list
     string = json.loads(response.text)
@@ -71,8 +69,7 @@ def adduser_to_stream(self, streamid, userid):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # return the token
     return response.status_code, response.text
 
@@ -94,8 +91,7 @@ def user_feature_update(self, userid):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
 
     # return the token
     return response.status_code, response.text
@@ -119,6 +115,5 @@ def search_user(self, search_str, search_filter, local):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     return response.status_code, response.text

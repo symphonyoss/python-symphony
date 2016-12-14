@@ -25,8 +25,7 @@ def list_connections(self):
                                 cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     connections = json.loads(response.text)
     # return the token
@@ -44,8 +43,7 @@ def connection_status(self, userid):
                                 cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     connection_status = json.loads(response.text)
     # return the token
@@ -67,8 +65,7 @@ def accept_connection(self, userid):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # return the token
     return response.status_code, response.text
 
@@ -88,7 +85,6 @@ def create_connection(self, userid):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # return the token
     return response.status_code, response.text

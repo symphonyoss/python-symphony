@@ -30,8 +30,8 @@ class Config:
         settings._interpolation = configparser.ExtendedInterpolation()
         try:
             settings.read(self.__config__)
-        except Exception, err:
-            print 'config file not readable: %s' % err
+        except Exception as err:
+            logging.error("Failed to load exception: %s" % err)
             sys.exit(2)
 
         # Connect to Symphony
@@ -60,7 +60,7 @@ class Config:
             pod = symphony.Pod(symphony_pod_uri, symphony_crt, symphony_key, session_token, keymngr_token)
 
             logging.info("INSTANTIATION ( all objects successful)")
-        except Exception, err:
+        except Exception as err:
             logging.error("Failed to authenticate and initialize: %s" % err)
             return 'you', 'have', 'failed'
         # return references and such
