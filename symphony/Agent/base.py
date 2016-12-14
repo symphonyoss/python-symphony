@@ -37,8 +37,7 @@ def test_echo(self, test_string):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     status_code = response.text
     # return the token
@@ -59,8 +58,7 @@ def create_datafeed(self):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     datafeed = json.loads(response.text)
     # return the token
@@ -80,8 +78,7 @@ def read_datafeed(self, streamid):
                                 cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     datafeed = response.text
     datastat = response.status_code
@@ -106,8 +103,7 @@ def send_message(self, threadid, msgFormat, message):
                                  cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
-        print e
-        return None
+        return e
     # load json response as list
     string = response.text
     # return the token

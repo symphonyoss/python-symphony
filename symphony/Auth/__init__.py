@@ -29,8 +29,7 @@ class Auth():
             response = requests.post(self.__session_url__ + 'sessionauth/v1/authenticate',
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as e:
-            print e
-            return None
+            return e
         # load json response as list
         data = json.loads(response.text)
         if response.status_code == 200:
@@ -48,8 +47,7 @@ class Auth():
             response = requests.post(self.__key_url__ + 'keyauth/v1/authenticate',
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as e:
-            print e
-            return None
+            return e
         # load json response as list
         data = json.loads(response.text)
         if response.status_code == 200:

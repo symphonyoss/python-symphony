@@ -8,9 +8,9 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-from Agent import Agent
-from Auth import Auth
-from Config import Config
-from Crypt import Crypt
-from Mml import Mml
-from Pod import Pod
+from .Agent import Agent
+from .Auth import Auth
+from .Config import Config
+from .Crypt import Crypt
+from .Mml import Mml
+from .Pod import Pod
