@@ -53,7 +53,43 @@ This project uses the following libraries:
 * bs4
 * pyopenssl
 
-----
+Using the module
+----------------
+
+This module is still in VERY early stages.  It's not full feature yet.
+However I have one bot up that makes use of it, and may be useful for
+you to look at as an example:
+
+`metronome bot <https://github.com/symphonyoss/metronome>`_
+
+
+Contributing
+------------
 
 .. _hacking guide: HACKING.rst
-Check out the `hacking guide`_.
+Start by checking out the `hacking guide`_.
+
+Next fork the repo, make your commits locally.
+You can run CI / CD checks by doing:
+
+First I recommend doing your work in a venv:
+
+.. code:: text
+
+    virtualenv symphony-test
+    ./symphony-test/bin/activate
+
+Then run tox
+
+.. code:: text
+
+    cd python-symphony
+    pip install --upgrade tox
+    tox
+
+Once you are happy with your code, open a pull request.
+Try to limit pull requests to signle specific changes.
+If you want to make a major change hit me up via symphony, 
+I am Matt Joyce ( symphony corporate ).  I am glad to hear
+ideas.  And I'd love to see this project take on a life of
+it's own.
