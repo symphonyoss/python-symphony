@@ -20,7 +20,7 @@ class Crypt():
         self.pwd = symphony_pwd
 
     def write_tmpfile(self, string):
-        path = '/tmp/' + hashlib.sha224(string).hexdigest()
+        fd, path = tempfile.mkstemp()
         filehandle = open(path, 'wb')
         filehandle.write(string)
         filehandle.close
