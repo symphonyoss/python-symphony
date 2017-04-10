@@ -13,6 +13,7 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 import ast
 import json
 import requests
+import symphony
 import unicodedata
 
 
@@ -22,24 +23,10 @@ def remove_control_characters(self, s):
 
 def test_echo(self, test_string):
     ''' echo test '''
-
-    headers = {'Content-Type': 'application/json',
-               'sessionToken': self.__session__,
-               'keyManagerToken': self.__keymngr__}
-
-    data = '{ "message": "'"%s"'" }' % test_string
-
-    # HTTP POST query to keymanager authenticate API
-    try:
-        response = requests.post(self.__url__ + 'agent/v1/util/echo',
-                                 headers=headers,
-                                 data=data,
-                                 cert=(self.__crt__, self.__key__),
-                                 verify=True)
-    except requests.exceptions.RequestException as e:
-        return e
-    # load json response as list
-    status_code = response.text
+    REST = symphony.RESTful()
+    req_hook = 'agent/v1/util/echo'
+    req_args = '{ "message": "'"%s"'" }' % test_string
+    status_code, response = REST.POST_query(req_hook, req_args)
     # return the token
     return status_code
 
