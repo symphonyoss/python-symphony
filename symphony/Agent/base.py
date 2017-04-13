@@ -53,8 +53,8 @@ def read_datafeed(self, streamid):
     # instantiate RESTful class()
     REST = symphony.RESTful()
     # REST API method endpoint
-    req_hook = 'agent/v1/datafeed/'
-    req_args = str(streamid) + '/read'
+    req_hook = 'agent/v1/datafeed/' + str(streamid) + '/read'
+    req_args = None
     status_code, response = REST.GET_query(req_hook, req_args)
     response = ast.literal_eval(response)
     return response, status_code
