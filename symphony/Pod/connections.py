@@ -11,80 +11,50 @@ __email__ = 'matt@nycresistor.com'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import json
-import requests
+import symphony
 
 
 def list_connections(self):
     ''' list connections '''
-    headers = {'content-type': 'application/json',
-               'sessionToken': self.__session__}
-
-    try:
-        response = requests.get(self.__url__ + 'pod/v1/connection/list?status=all',
-                                headers=headers,
-                                cert=(self.__crt__, self.__key__),
-                                verify=True)
-    except requests.exceptions.RequestException as e:
-        return e
-    # load json response as list
-    connections = json.loads(response.text)
-    # return the token
+    # instantiate RESTful class()
+    REST = symphony.RESTful()
+    # REST API method endpoint
+    req_hook = 'pod/v1/connection/list?status=all'
+    req_args = None
+    status_code, response = REST.GET_query(req_hook, req_args)
+    connections = json.loads(response)
     return connections
 
 
 def connection_status(self, userid):
     ''' get connection status '''
-    headers = {'content-type': 'application/json',
-               'sessionToken': self.__session__}
-
-    try:
-        response = requests.get(self.__url__ + 'pod/v1/connection/' + userid + '/info',
-                                headers=headers,
-                                cert=(self.__crt__, self.__key__),
-                                verify=True)
-    except requests.exceptions.RequestException as e:
-        return e
-    # load json response as list
-    connection_status = json.loads(response.text)
-    # return the token
+    # instantiate RESTful class()
+    REST = symphony.RESTful()
+    # REST API method endpoint
+    req_hook = 'pod/v1/connection/'
+    req_args = userid + '/info'
+    status_code, response = REST.GET_query(req_hook, req_args)
+    connection_status = json.loads(response)
     return connection_status
 
 
 def accept_connection(self, userid):
     ''' accept connection request '''
-    headers = {'Content-Type': 'application/json',
-               'sessionToken': self.__session__}
-
-    data = '{ "userId": %s }' % userid
-
-    # HTTP POST query to keymanager authenticate API
-    try:
-        response = requests.post(self.__url__ + 'pod/v1/connection/accept',
-                                 headers=headers,
-                                 data=data,
-                                 cert=(self.__crt__, self.__key__),
-                                 verify=True)
-    except requests.exceptions.RequestException as e:
-        return e
-    # return the token
-    return response.status_code, response.text
+    # instantiate RESTful class()
+    REST = symphony.RESTful()
+    # REST API method endpoint
+    req_hook = 'pod/v1/connection/accept'
+    req_args = '{ "userId": %s }' % userid
+    status_code, response = REST.POST_query(req_hook, req_args)
+    return status_code, response
 
 
 def create_connection(self, userid):
     ''' create connection '''
-    headers = {'Content-Type': 'application/json',
-               'sessionToken': self.__session__}
-
-    data = '{ "userId": %s }' % userid
-
-    # HTTP POST query to keymanager authenticate API
-    try:
-        response = requests.post(self.__url__ + 'pod/v1/connection/create',
-                                 headers=headers,
-                                 data=data,
-                                 cert=(self.__crt__, self.__key__),
-                                 verify=True)
-    except requests.exceptions.RequestException as e:
-        return e
-    # return the token
-    return response.status_code, response.text
+    # instantiate RESTful class()
+    REST = symphony.RESTful()
+    # REST API method endpoint
+    req_hook = 'pod/v1/connection/create'
+    req_args = '{ "userId": %s }' % userid
+    status_code, response = REST.POST_query(req_hook, req_args)
+    return status_code, response
