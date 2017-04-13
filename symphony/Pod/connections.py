@@ -31,8 +31,8 @@ def connection_status(self, userid):
     # instantiate RESTful class()
     REST = symphony.RESTful()
     # REST API method endpoint
-    req_hook = 'pod/v1/connection/'
-    req_args = userid + '/info'
+    req_hook = 'pod/v1/connection/' + userid + '/info'
+    req_args = None
     status_code, response = REST.GET_query(req_hook, req_args)
     connection_status = json.loads(response)
     return connection_status
