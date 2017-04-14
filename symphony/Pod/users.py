@@ -43,6 +43,14 @@ def user_feature_update(self, userid):
     return status_code, response
 
 
+def user_presence(self, userid):
+    ''' check on presence of a user '''
+    req_hook = 'pod/v2/user/' + str(userid) + '/presence'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, response
+
+
 def search_user(self, search_str, search_filter, local):
     ''' add a user to a stream '''
     req_hook = 'pod/v1/user/search?local=' + local
@@ -53,3 +61,5 @@ def search_user(self, search_str, search_filter, local):
     req_args = json.dumps(req_args)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
