@@ -1,6 +1,6 @@
 '''
     Purpose:
-        pod methods
+        pod endpoint user methods
 '''
 
 __author__ = 'Matt Joyce'
