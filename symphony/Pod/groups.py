@@ -31,3 +31,10 @@ def if_group_member_add(self, group_id, userids):
     req_args = {'usersListId': userids}
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
+def ib_group_policy_list(self):
+    req_hook = 'pod/v1/admin/policy/list'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, json.loads(response)
