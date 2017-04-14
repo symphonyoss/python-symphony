@@ -14,6 +14,7 @@ import symphony
 
 
 class Pod():
+    from .base import sessioninfo
     from .users import get_userid_by_email
     from .users import get_user_id_by_user
     from .users import adduser_to_stream
