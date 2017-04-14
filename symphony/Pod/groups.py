@@ -30,6 +30,7 @@ def if_group_member_add(self, group_id, userids):
     ''' ib group member add '''
     req_hook = 'pod/v1/admin/group/' + group_id + '/membership/add'
     req_args = {'usersListId': userids}
+    req_args = json.dumps(req_args)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
 
