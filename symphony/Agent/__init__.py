@@ -27,4 +27,4 @@ class Agent():
         self.__key__ = key
         self.__session__ = session
         self.__keymngr__ = keymngr
-        self.REST = symphony.RESTful(self.__url__, self.__crt__, self.__key__, self.__session__, self.__keymngr__)
+        self.__rest__ = symphony.RESTful(self.__url__, self.__crt__, self.__key__, self.__session__, self.__keymngr__)

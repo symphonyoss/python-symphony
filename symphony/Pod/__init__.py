@@ -10,6 +10,8 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@nycresistor.com'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
+import symphony
+
 
 class Pod():
     from .base import get_userid_by_email
@@ -28,3 +30,4 @@ class Pod():
         self.__key__ = key
         self.__session__ = session
         self.__keymngr__ = keymngr
+        self.__rest__ = symphony.RESTful(self.__url__, self.__crt__, self.__key__, self.__session__, self.__keymngr__)
