@@ -14,11 +14,11 @@ import symphony
 
 
 class Pod():
-    from .base import get_userid_by_email
-    from .base import get_user_id_by_user
-    from .base import adduser_to_stream
-    from .base import user_feature_update
-    from .base import search_user
+    from .users import get_userid_by_email
+    from .users import get_user_id_by_user
+    from .users import adduser_to_stream
+    from .users import user_feature_update
+    from .users import search_user
     from .connections import list_connections
     from .connections import connection_status
     from .connections import accept_connection
