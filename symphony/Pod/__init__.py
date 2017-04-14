@@ -14,12 +14,20 @@ import symphony
 
 
 class Pod():
+    # basic methods
     from .base import sessioninfo
+    # user methods
     from .users import get_userid_by_email
     from .users import get_user_id_by_user
     from .users import adduser_to_stream
     from .users import user_feature_update
     from .users import search_user
+    # group methods
+    from .groups import ib_group_list
+    from .groups import ib_group_member_list
+    from .groups import ib_group_member_add
+    from .groups import ib_group_policy_list
+    # connection methods
     from .connections import list_connections
     from .connections import connection_status
     from .connections import accept_connection
