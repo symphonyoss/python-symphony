@@ -51,6 +51,14 @@ def user_presence(self, userid):
     return status_code, response
 
 
+def list_features(self):
+    ''' list features the pod supports '''
+    req_hook = 'pod/v1/admin/system/features/list'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, json.dumps(response)
+
+
 def search_user(self, search_str, search_filter, local):
     ''' add a user to a stream '''
     req_hook = 'pod/v1/user/search?local=' + local
