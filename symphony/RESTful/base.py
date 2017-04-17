@@ -22,9 +22,14 @@ def GET_query(self, req_hook, req_args):
 
     # HTTP GET query method using requests module
     try:
-        response = requests.get(self.__url__ + req_hook + str(req_args),
-                                headers=headers,
-                                verify=True)
+        if req_args is None:
+            response = requests.get(self.__url__ + req_hook,
+                                    headers=headers,
+                                    verify=True)
+        else:
+            response = requests.get(self.__url__ + req_hook + str(req_args),
+                                    headers=headers,
+                                    verify=True)
     except requests.exceptions.RequestException as e:
         logging.error(e)
         return '500', 'Internal Error in RESTful.GET_query()'
