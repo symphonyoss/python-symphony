@@ -62,7 +62,7 @@ class Pod_Users_test(unittest.TestCase):
 
     @httpretty.activate
     def test_adduser_to_stream(self):
-        ''' test get_user_id_by_user '''
+        ''' test adduser_to_stream '''
         # register response
         httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/room/stream_id/membership/add",
                                body='{ "format": "TEXT", "message": "Member added" }',
@@ -75,6 +75,26 @@ class Pod_Users_test(unittest.TestCase):
         pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
         status_code, response = pod.adduser_to_stream('stream_id', '123456')
+        # verify return
+        assert status_code == 200
+
+    @httpretty.activate
+    def test_user_feature_update(self):
+        ''' test user_feature_update '''
+        # register response
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/admin/123456/features/update",
+                               body='{ "format": "TEXT", "message": "OK" }',
+                               status=200,
+                               content_type='text/json')
+        # dummy authenticate
+        symphony_pod_uri = 'http://fake.pod/'
+        session_token = 'sessions'
+        keymngr_token = 'keys'
+        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
+        # run test query
+        test_feature_query = '[{"entitlment": "isExternalRoomEnabled", "enabled": true },'\
+                             '{"entitlment": "isExternalIMEnabled", "enabled": true }]'
+        status_code, response = pod.user_feature_update('123456', test_feature_query)
         # verify return
         assert status_code == 200
 
