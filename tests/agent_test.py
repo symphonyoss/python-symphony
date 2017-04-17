@@ -66,8 +66,15 @@ class Agent_tests(unittest.TestCase):
     def test_send_message(self):
         ''' test get_user_id_by_email '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/util/echo",
-                               body='{"message": "test string"}',
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v2/stream/thread_id/message/create",
+                               body='{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
+                                      "timestamp": "1464627173769", \
+                                      "v2messageType": "V2Message", \
+                                      "streamId": "thread_id", \
+                                      "message": "test string", \
+                                      "attachments": [], \
+                                      "fromUserId": 123456 \
+                                    }',
                                status=200,
                                content_type='text/json')
         # dummy authenticate
@@ -76,11 +83,11 @@ class Agent_tests(unittest.TestCase):
         keymngr_token = 'keys'
         agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        status_code, response = agent.send_message('test string')
+        status_code, response = agent.send_message('thread_id', 'TEXT', 'test string')
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response['message'] == "test string"
+        assert response['streamId'] == 'test string'
 
 
 if __name__ == '__main__':
