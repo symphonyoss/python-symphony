@@ -23,21 +23,24 @@ import symphony
 
 class Agent_tests(unittest.TestCase):
 
+    def __init__(self, *args, **kwargs):
+        super(Agent_tests, self).__init__(*args, **kwargs)
+        self.__uri__ = "http://fake.pod/"
+        self.__session__ = "sessions"
+        self.__keymngr__ = "keys"
+        self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
+        self.agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
+
     @httpretty.activate
     def test_test_echo(self):
         ''' test agent.test_echo'''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/util/echo",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "/agent/v1/util/echo",
                                body='{"message": "test string"}',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        status_code, response = agent.test_echo('test string')
+        status_code, response = self.agent.test_echo('test string')
         response = json.loads(response)
         # verify return
         assert status_code == 200
