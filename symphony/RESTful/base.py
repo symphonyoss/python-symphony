@@ -22,7 +22,7 @@ def GET_query(self, req_hook, req_args):
 
     # HTTP GET query method using requests module
     try:
-        response = requests.get(self.__url__ + req_hook + req_args,
+        response = requests.get(self.__url__ + req_hook + str(req_args),
                                 headers=headers,
                                 verify=True)
     except requests.exceptions.RequestException as e:
@@ -41,10 +41,15 @@ def POST_query(self, req_hook, req_args):
 
     # HTTP POST query to keymanager authenticate API
     try:
-        response = requests.post(self.__url__ + req_hook,
-                                 headers=headers,
-                                 data=req_args,
-                                 verify=True)
+        if req_args is None:
+            response = requests.post(self.__url__ + req_hook,
+                                     headers=headers,
+                                     verify=True)
+        else:
+            response = requests.post(self.__url__ + req_hook,
+                                     headers=headers,
+                                     data=req_args,
+                                     verify=True)
     except requests.exceptions.RequestException as e:
         logging.error(e)
         return '500', 'Internal Error in RESTful.POST_query()'
