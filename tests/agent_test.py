@@ -87,7 +87,8 @@ class Agent_tests(unittest.TestCase):
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response['streamId'] == 'test string'
+        assert response['streamId'] == 'thread_id'
+        assert response['message'] == 'test string'
 
 
 if __name__ == '__main__':
