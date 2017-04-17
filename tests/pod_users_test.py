@@ -74,7 +74,7 @@ class Pod_Users_test(unittest.TestCase):
         keymngr_token = 'keys'
         pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        status_code, response = pod.get_user_id_by_user('stream_id', '123456')
+        status_code, response = pod.adduser_to_stream('stream_id', '123456')
         # verify return
         assert status_code == 200
 
