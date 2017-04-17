@@ -37,11 +37,9 @@ def adduser_to_stream(self, streamid, userid):
     return status_code, response
 
 
-def user_feature_update(self, userid):
+def user_feature_update(self, userid, req_args):
     ''' update features by user id '''
     req_hook = 'pod/v1/admin/user/' + str(userid) + '/features/update'
-    req_args = '[{"entitlment": "isExternalRoomEnabled", "enabled": true },'\
-               '{"entitlment": "isExternalIMEnabled", "enabled": true }]'
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
 
