@@ -82,7 +82,7 @@ class Pod_Users_test(unittest.TestCase):
     def test_user_feature_update(self):
         ''' test user_feature_update '''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/admin/123456/features/update",
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/admin/user/123456/features/update",
                                body='{ "format": "TEXT", "message": "OK" }',
                                status=200,
                                content_type='text/json')
