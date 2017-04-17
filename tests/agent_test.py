@@ -49,15 +49,12 @@ class Agent_tests(unittest.TestCase):
     def test_create_datafeed(self):
         ''' test agent.create_datafeed '''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/datafeed/create",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v1/datafeed/create",
                                body='{ "id": 78910 }',
                                status=200,
                                content_type='text/json')
         # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
+        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
         # run test query
         status_code, response = agent.create_datafeed()
         # verify return
@@ -68,7 +65,7 @@ class Agent_tests(unittest.TestCase):
     def test_read_datafeed(self):
         ''' test agent.read_datafeed '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/datafeed/datafeed_id/read",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "agent/v1/datafeed/datafeed_id/read",
                                body='[{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
                                        "timestamp": "1464627173769", \
                                        "v2messageType": "V2Message", \
@@ -88,10 +85,7 @@ class Agent_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
+        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
         # run test query
         status_code, response = agent.read_datafeed('datafeed_id')
         # verify return
@@ -101,7 +95,7 @@ class Agent_tests(unittest.TestCase):
     def test_send_message(self):
         ''' test agent.send_message '''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v2/stream/thread_id/message/create",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v2/stream/thread_id/message/create",
                                body='{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
                                       "timestamp": "1464627173769", \
                                       "v2messageType": "V2Message", \
@@ -113,10 +107,7 @@ class Agent_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
+        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
         # run test query
         status_code, response = agent.send_message('thread_id', 'TEXT', 'test string')
         response = json.loads(response)
