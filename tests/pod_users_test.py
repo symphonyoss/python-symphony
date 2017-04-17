@@ -20,9 +20,16 @@ import unittest
 import symphony
 
 
-class Pod_Users_test(unittest.TestCase):
+@httpretty.activate
+class Pod_Users_tests(unittest.TestCase):
 
-    @httpretty.activate
+    def __init__(self, *args, **kwargs):
+        super(Pod_Users_tests, self).__init__(*args, **kwargs)
+        self.__uri__ = "http://fake.pod/"
+        self.__session__ = "sessions"
+        self.__keymngr__ = "keys"
+        self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
+
     def test_get_userid_by_email(self):
         ''' test get_user_id_by_email '''
         # register response
@@ -30,18 +37,12 @@ class Pod_Users_test(unittest.TestCase):
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        response = pod.get_userid_by_email('test@fake.pod')
+        response = self.pod.get_userid_by_email('test@fake.pod')
         # verify return
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
-    @httpretty.activate
     def test_get_user_id_by_user(self):
         ''' test get_user_id_by_user '''
         # register response
@@ -49,18 +50,12 @@ class Pod_Users_test(unittest.TestCase):
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        response = pod.get_user_id_by_user('testuser')
+        response = self.pod.get_user_id_by_user('testuser')
         # verify return
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
-    @httpretty.activate
     def test_adduser_to_stream(self):
         ''' test adduser_to_stream '''
         # register response
@@ -68,17 +63,11 @@ class Pod_Users_test(unittest.TestCase):
                                body='{ "format": "TEXT", "message": "Member added" }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        status_code, response = pod.adduser_to_stream('stream_id', '123456')
+        status_code, response = self.pod.adduser_to_stream('stream_id', '123456')
         # verify return
         assert status_code == 200
 
-    @httpretty.activate
     def test_user_feature_update(self):
         ''' test user_feature_update '''
         # register response
@@ -86,15 +75,10 @@ class Pod_Users_test(unittest.TestCase):
                                body='{ "format": "TEXT", "message": "OK" }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        symphony_pod_uri = 'http://fake.pod/'
-        session_token = 'sessions'
-        keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
         test_feature_query = '[{"entitlment": "isExternalRoomEnabled", "enabled": true },'\
                              '{"entitlment": "isExternalIMEnabled", "enabled": true }]'
-        status_code, response = pod.user_feature_update('123456', test_feature_query)
+        status_code, response = self.pod.user_feature_update('123456', test_feature_query)
         # verify return
         assert status_code == 200
 
