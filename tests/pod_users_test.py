@@ -36,7 +36,7 @@ class Pod_Users_test(unittest.TestCase):
         keymngr_token = 'keys'
         pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        response = pod.get_userid_by_email('test@email.com')
+        response = pod.get_userid_by_email('test@fake.pod')
         # verify return
         assert response.text == "123456"
 
