@@ -21,6 +21,7 @@ import unittest
 import symphony
 
 
+@httpretty.activate
 class Agent_tests(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
@@ -28,8 +29,6 @@ class Agent_tests(unittest.TestCase):
         self.__uri__ = "http://fake.pod/"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
-
-        @httppretty.activate
         self.agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
 
     def test_test_echo(self):
