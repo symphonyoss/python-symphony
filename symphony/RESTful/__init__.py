@@ -15,9 +15,7 @@ class RESTful():
     from .base import GET_query
     from .base import POST_query
 
-    def __init__(self, url, crt, key, session, keymngr):
+    def __init__(self, url, session, keymngr):
         self.__url__ = url
-        self.__crt__ = crt
-        self.__key__ = key
         self.__session__ = session
         self.__keymngr__ = keymngr

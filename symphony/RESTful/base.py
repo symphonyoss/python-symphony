@@ -24,7 +24,6 @@ def GET_query(self, req_hook, req_args):
     try:
         response = requests.get(self.__url__ + req_hook + req_args,
                                 headers=headers,
-                                cert=(self.__crt__, self.__key__),
                                 verify=True)
     except requests.exceptions.RequestException as e:
         logging.error(e)
@@ -45,7 +44,6 @@ def POST_query(self, req_hook, req_args):
         response = requests.post(self.__url__ + req_hook,
                                  headers=headers,
                                  data=req_args,
-                                 cert=(self.__crt__, self.__key__),
                                  verify=True)
     except requests.exceptions.RequestException as e:
         logging.error(e)
