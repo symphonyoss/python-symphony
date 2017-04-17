@@ -40,7 +40,8 @@ class Agent_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.agent.test_echo('test string')
+        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
+        status_code, response = agent.test_echo('test string')
         response = json.loads(response)
         # verify return
         assert status_code == 200
