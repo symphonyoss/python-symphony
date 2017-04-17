@@ -25,7 +25,7 @@ class Agent_tests(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(Agent_tests, self).__init__(*args, **kwargs)
-        self.__uri__ = "http://fake.pod"
+        self.__uri__ = "http://fake.pod/"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
 
@@ -33,7 +33,7 @@ class Agent_tests(unittest.TestCase):
     def test_test_echo(self):
         ''' test agent.test_echo'''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "/agent/v1/util/echo",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v1/util/echo",
                                body='{"message": "test string"}',
                                status=200,
                                content_type='text/json')
