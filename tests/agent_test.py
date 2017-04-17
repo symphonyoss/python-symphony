@@ -26,40 +26,38 @@ class Agent_tests(unittest.TestCase):
     def test_test_echo(self):
         ''' test get_user_id_by_email '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user",
-                               body='{"id": 123456, "emailAddress": "test@fake.pod" }',
+        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/util/echo",
+                               body='{"message": "test string"}',
                                status=200,
                                content_type='text/json')
         # dummy authenticate
         symphony_pod_uri = 'http://fake.pod/'
         session_token = 'sessions'
         keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
+        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        response = pod.get_userid_by_email('test@fake.pod')
+        status_code, response = agent.test_echo('test string')
         # verify return
-        assert response['id'] == 123456
-        assert response['emailAddress'] == "test@fake.pod"
+        assert status_code == 200
 
     @httpretty.activate
     def test_create_datafeed(self):
         ''' test user_feature_update '''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/admin/123456/features/update",
-                               body='{ "format": "TEXT", "message": "OK" }',
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/datafeed/create",
+                               body='{ "id": 78910 }',
                                status=200,
                                content_type='text/json')
         # dummy authenticate
         symphony_pod_uri = 'http://fake.pod/'
         session_token = 'sessions'
         keymngr_token = 'keys'
-        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
+        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        test_feature_query = '[{"entitlment": "isExternalRoomEnabled", "enabled": true },'\
-                             '{"entitlment": "isExternalIMEnabled", "enabled": true }]'
-        status_code, response = pod.user_feature_update('123456', test_feature_query)
+        status_code, response = agent.create_datafeed()
         # verify return
         assert status_code == 200
+        assert response == 78910
 
 
 if __name__ == '__main__':

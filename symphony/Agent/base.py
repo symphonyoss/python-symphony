@@ -27,7 +27,7 @@ def test_echo(self, test_string):
     # receive HTTP response code and response text
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     # return the token
-    return status_code
+    return status_code, response
 
 
 def create_datafeed(self):
@@ -38,7 +38,7 @@ def create_datafeed(self):
     # load json response as list
     datafeed = json.loads(response)
     # return the token
-    return datafeed['id']
+    return status_code, datafeed['id']
 
 
 def read_datafeed(self, streamid):
@@ -47,7 +47,7 @@ def read_datafeed(self, streamid):
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
     response = ast.literal_eval(response)
-    return response, status_code
+    return status_code, response
 
 
 def send_message(self, threadid, msgFormat, message):
@@ -55,4 +55,4 @@ def send_message(self, threadid, msgFormat, message):
     req_hook = 'agent/v2/stream/' + threadid + '/message/create'
     req_args = '{ "format": "%s", "message": "'"%s"'" }' % (msgFormat, message)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
-    return response
+    return status_code, response
