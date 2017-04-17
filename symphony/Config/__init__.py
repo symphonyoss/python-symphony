@@ -67,35 +67,3 @@ class Config:
             return 'you', 'have', 'failed'
         # return references and such
         return agent, pod, symphony_sid
-
-    def dummy_connect(self):
-        ''' dummy connections for unit testing etc '''
-
-        # Plug settings for dummy tests
-        symphony_pod_uri = 'http://fake.pod/'
-        symphony_agent_uri = 'http://fake.pod/'
-        symphony_auth_uri = 'http://fake.pod/'
-        symphony_sid = 'test_sid'
-        symphony_crt = 'test.crt'
-        symphony_key = 'test.key'
-
-        try:
-            # instantiate auth methods
-            auth = symphony.Auth(symphony_auth_uri, symphony_auth_uri, symphony_crt, symphony_key)
-            # get session token
-            session_token = auth.get_session_token()
-            logging.info("AUTH ( session token ): %s" % session_token)
-            # get keymanager token
-            keymngr_token = auth.get_keymanager_token()
-            logging.info("AUTH ( key manager token ): %s" % keymngr_token)
-            # instantiate agent methods
-            agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
-            # instantiate pod methods
-            pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
-
-            logging.info("INSTANTIATION ( all objects successful)")
-        except Exception as err:
-            logging.error("Failed to authenticate and initialize: %s" % err)
-            return 'you', 'have', 'failed'
-        # return references and such
-        return agent, pod, symphony_sid
