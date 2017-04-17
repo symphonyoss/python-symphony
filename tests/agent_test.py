@@ -16,6 +16,7 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2017, Symphony Communication Services LLC'
 
 import httpretty
+import json
 import unittest
 import symphony
 
@@ -37,8 +38,10 @@ class Agent_tests(unittest.TestCase):
         agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
         # run test query
         status_code, response = agent.test_echo('test string')
+        response = json.loads(response)
         # verify return
         assert status_code == 200
+        assert response['message'] == "test string"
 
     @httpretty.activate
     def test_create_datafeed(self):
@@ -58,6 +61,26 @@ class Agent_tests(unittest.TestCase):
         # verify return
         assert status_code == 200
         assert response == 78910
+
+    @httpretty.activate
+    def test_send_message(self):
+        ''' test get_user_id_by_email '''
+        # register response
+        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/util/echo",
+                               body='{"message": "test string"}',
+                               status=200,
+                               content_type='text/json')
+        # dummy authenticate
+        symphony_pod_uri = 'http://fake.pod/'
+        session_token = 'sessions'
+        keymngr_token = 'keys'
+        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
+        # run test query
+        status_code, response = agent.send_message('test string')
+        response = json.loads(response)
+        # verify return
+        assert status_code == 200
+        assert response['message'] == "test string"
 
 
 if __name__ == '__main__':
