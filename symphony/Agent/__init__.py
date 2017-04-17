@@ -21,10 +21,8 @@ class Agent():
     from .base import read_datafeed
     from .base import send_message
 
-    def __init__(self, url, crt, key, session, keymngr):
+    def __init__(self, url, session, keymngr):
         self.__url__ = url
-        self.__crt__ = crt
-        self.__key__ = key
         self.__session__ = session
         self.__keymngr__ = keymngr
-        self.__rest__ = symphony.RESTful(self.__url__, self.__crt__, self.__key__, self.__session__, self.__keymngr__)
+        self.__rest__ = symphony.RESTful(self.__url__, self.__session__, self.__keymngr__)
