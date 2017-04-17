@@ -25,7 +25,7 @@ class Agent_tests(unittest.TestCase):
 
     @httpretty.activate
     def test_test_echo(self):
-        ''' test get_user_id_by_email '''
+        ''' test agent.test_echo'''
         # register response
         httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/util/echo",
                                body='{"message": "test string"}',
@@ -45,7 +45,7 @@ class Agent_tests(unittest.TestCase):
 
     @httpretty.activate
     def test_create_datafeed(self):
-        ''' test user_feature_update '''
+        ''' test agent.create_datafeed '''
         # register response
         httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/datafeed/create",
                                body='{ "id": 78910 }',
@@ -63,8 +63,41 @@ class Agent_tests(unittest.TestCase):
         assert response == 78910
 
     @httpretty.activate
+    def test_read_datafeed(self):
+        ''' test agent.read_datafeed '''
+        # register response
+        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/datafeed/datafeed_id/read",
+                               body='[{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
+                                       "timestamp": "1464627173769", \
+                                       "v2messageType": "V2Message", \
+                                       "streamId": "thread_id", \
+                                       "message": "test string 1", \
+                                       "attachments": [], \
+                                       "fromUserId": 123456 \
+                                      },\
+                                      {"id": "9zJFGHJGHGHGHMzz2afLLL___fazkemesA", \
+                                       "timestamp": "1464627173923", \
+                                       "v2messageType": "V2Message", \
+                                       "streamId": "thread_id", \
+                                       "message": "test string 2", \
+                                       "attachments": [], \
+                                       "fromUserId": 234567 \
+                                      }]',
+                               status=200,
+                               content_type='text/json')
+        # dummy authenticate
+        symphony_pod_uri = 'http://fake.pod/'
+        session_token = 'sessions'
+        keymngr_token = 'keys'
+        agent = symphony.Agent(symphony_pod_uri, session_token, keymngr_token)
+        # run test query
+        status_code, response = agent.read_datafeed('datafeed_id')
+        # verify return
+        assert status_code == 200
+
+    @httpretty.activate
     def test_send_message(self):
-        ''' test get_user_id_by_email '''
+        ''' test agent.send_message '''
         # register response
         httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v2/stream/thread_id/message/create",
                                body='{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
