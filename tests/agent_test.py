@@ -29,7 +29,9 @@ class Agent_tests(unittest.TestCase):
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
 
-    @httpretty.activate
+        @httppretty.activate
+        self.agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
+
     def test_test_echo(self):
         ''' test agent.test_echo'''
         # register response
@@ -38,14 +40,12 @@ class Agent_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
-        status_code, response = agent.test_echo('test string')
+        status_code, response = self.agent.test_echo('test string')
         response = json.loads(response)
         # verify return
         assert status_code == 200
         assert response['message'] == "test string"
 
-    @httpretty.activate
     def test_create_datafeed(self):
         ''' test agent.create_datafeed '''
         # register response
@@ -53,15 +53,12 @@ class Agent_tests(unittest.TestCase):
                                body='{ "id": 78910 }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
         # run test query
-        status_code, response = agent.create_datafeed()
+        status_code, response = self.agent.create_datafeed()
         # verify return
         assert status_code == 200
         assert response == 78910
 
-    @httpretty.activate
     def test_read_datafeed(self):
         ''' test agent.read_datafeed '''
         # register response
@@ -84,14 +81,11 @@ class Agent_tests(unittest.TestCase):
                                       }]',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
-        # run test query
-        status_code, response = agent.read_datafeed('datafeed_id')
+        # run query
+        status_code, response = self.agent.read_datafeed('datafeed_id')
         # verify return
         assert status_code == 200
 
-    @httpretty.activate
     def test_send_message(self):
         ''' test agent.send_message '''
         # register response
@@ -106,10 +100,8 @@ class Agent_tests(unittest.TestCase):
                                     }',
                                status=200,
                                content_type='text/json')
-        # dummy authenticate
-        agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
         # run test query
-        status_code, response = agent.send_message('thread_id', 'TEXT', 'test string')
+        status_code, response = self.agent.send_message('thread_id', 'TEXT', 'test string')
         response = json.loads(response)
         # verify return
         assert status_code == 200
