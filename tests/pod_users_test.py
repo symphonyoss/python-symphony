@@ -27,16 +27,16 @@ class Pod_Users_test(unittest.TestCase):
         ''' test get_user_id_by_email '''
         # register response
         httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user",
-                           body='{"userId": 123456 }',
-                           status=500,
-                           content_type='text/json')
+                               body='{"userId": 123456 }',
+                               status=500,
+                               content_type='text/json')
         # dummy authenticate
         symphony_pod_uri = 'http://fake.pod/'
         session_token = 'sessions'
         keymngr_token = 'keys'
         pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
-        status_code, response = pod.get_userid_by_email('test@email.com')
+        response = pod.get_userid_by_email('test@email.com')
         # verify return
         assert response.text == "123456"
 
