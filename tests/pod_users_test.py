@@ -29,9 +29,10 @@ class Pod_Users_test(unittest.TestCase):
         httpretty.register_uri(httpretty.GET, "http://fake.pod/",
                                body="{userId: '123456'}")
         # dummy authenticate
-        conn = symphony.Config('dummy-test.cfg')
-        agent, pod, symphony_sid = conn.dummy_connect()
-
+        symphony_pod_uri = 'http://fake.pod/'
+        session_token = 'sessions'
+        keymngr_token = 'keys'
+        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
         # run test query
         status_code, response = pod.get_userid_by_email('test@email.com')
         # verify return
