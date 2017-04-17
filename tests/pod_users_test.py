@@ -28,7 +28,7 @@ class Pod_Users_test(unittest.TestCase):
         # register response
         httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user",
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
-                               status=500,
+                               status=200,
                                content_type='text/json')
         # dummy authenticate
         symphony_pod_uri = 'http://fake.pod/'
