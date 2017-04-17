@@ -22,14 +22,11 @@ import symphony
 
 class Pod_Users_test(unittest.TestCase):
 
-    def __init__(self):
-        self.__uri__ = "http://fake.pod/"
-
     @httpretty.activate
     def test_get_user_id_by_email(self):
         ''' test get_user_id_by_email '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "/pod/v1/user",
+        httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user",
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=500,
                                content_type='text/json')
