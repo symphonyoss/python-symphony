@@ -25,11 +25,9 @@ class Agent_tests(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(Agent_tests, self).__init__(*args, **kwargs)
-        self.__uri__ = "http://fake.pod/"
+        self.__uri__ = "http://fake.pod"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
-        self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
-        self.agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
 
     @httpretty.activate
     def test_test_echo(self):
