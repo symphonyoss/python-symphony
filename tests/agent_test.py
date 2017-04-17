@@ -27,7 +27,7 @@ class Agent_tests(unittest.TestCase):
     def test_test_echo(self):
         ''' test get_user_id_by_email '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/agent/v1/util/echo",
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/agent/v1/util/echo",
                                body='{"message": "test string"}',
                                status=200,
                                content_type='text/json')
@@ -41,7 +41,7 @@ class Agent_tests(unittest.TestCase):
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        # assert response['message'] == "test string"
+        assert response['message'] == "test string"
 
     @httpretty.activate
     def test_create_datafeed(self):
