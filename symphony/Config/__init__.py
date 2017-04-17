@@ -57,9 +57,9 @@ class Config:
             keymngr_token = auth.get_keymanager_token()
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
-            agent = symphony.Agent(symphony_agent_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
             # instantiate pod methods
-            pod = symphony.Pod(symphony_pod_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
 
             logging.info("INSTANTIATION ( all objects successful)")
         except Exception as err:
@@ -89,9 +89,9 @@ class Config:
             keymngr_token = auth.get_keymanager_token()
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
-            agent = symphony.Agent(symphony_agent_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
             # instantiate pod methods
-            pod = symphony.Pod(symphony_pod_uri, symphony_crt, symphony_key, session_token, keymngr_token)
+            pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
 
             logging.info("INSTANTIATION ( all objects successful)")
         except Exception as err:
