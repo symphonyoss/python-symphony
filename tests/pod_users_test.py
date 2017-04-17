@@ -60,6 +60,24 @@ class Pod_Users_test(unittest.TestCase):
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
+    @httpretty.activate
+    def test_adduser_to_stream(self):
+        ''' test get_user_id_by_user '''
+        # register response
+        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/room/stream_id/membership/add",
+                               body='{ "format": "TEXT", "message": "Member added" }',
+                               status=200,
+                               content_type='text/json')
+        # dummy authenticate
+        symphony_pod_uri = 'http://fake.pod/'
+        session_token = 'sessions'
+        keymngr_token = 'keys'
+        pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
+        # run test query
+        status_code, response = pod.get_user_id_by_user('stream_id', '123456')
+        # verify return
+        assert status_code == 200
+
 
 if __name__ == '__main__':
     unittest.main()
