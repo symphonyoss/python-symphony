@@ -30,7 +30,7 @@ class Pod_Users_test(unittest.TestCase):
         ''' test get_user_id_by_email '''
         # register response
         httpretty.register_uri(httpretty.GET, self.__uri__ + "/pod/v1/user",
-                               body='{"userId": 123456 }',
+                               body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=500,
                                content_type='text/json')
         # dummy authenticate
@@ -41,7 +41,8 @@ class Pod_Users_test(unittest.TestCase):
         # run test query
         response = pod.get_userid_by_email('test@fake.pod')
         # verify return
-        assert response.text == "123456"
+        assert response['id'] == 123456
+        assert response['emailAddress'] == "test@fake.pod"
 
 
 if __name__ == '__main__':
