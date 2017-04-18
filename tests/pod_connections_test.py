@@ -33,7 +33,7 @@ class Pod_Connections_tests(unittest.TestCase):
     def test_list_connections(self):
         ''' test pod.list_connections '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/list?status=all",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/list",
                                body='[{ \
                                        "userId": 7078106126503, \
                                        "status": "PENDING_OUTGOING", \
