@@ -138,7 +138,7 @@ class Pod_Group_tests(unittest.TestCase):
         assert status_code == 200
         for policy in response:
             if policy['id'] == "56a27ae0e4b0d291cbc791ca":
-                assert policy['active'] is True
+                assert policy['active'] is False
 
 
 if __name__ == '__main__':
