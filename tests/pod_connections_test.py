@@ -31,7 +31,7 @@ class Pod_Connections_tests(unittest.TestCase):
         self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
 
     def test_list_connections(self):
-        ''' test agent.test_echo'''
+        ''' test pod.list_connections '''
         # register response
         httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/list?status=all",
                                body='[{ \
@@ -55,17 +55,21 @@ class Pod_Connections_tests(unittest.TestCase):
         assert response[0]['userId'] == 7078106126503
 
     def test_connection_status(self):
-        ''' test agent.create_datafeed '''
+        ''' test pod.connection_status '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v1/datafeed/create",
-                               body='{ "id": 78910 }',
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/123456/info",
+                               body='{ \
+                                      "userId": 123456, \
+                                      "status": "ACCEPTED" \
+                                     }',
                                status=200,
                                content_type='text/json')
         # run test query
         status_code, response = self.pod.connection_status()
         # verify return
+        response = json.loads(response)
         assert status_code == 200
-        assert response == 78910
+        assert response['status'] == "ACCEPTED"
 
     def test_read_datafeed(self):
         ''' test agent.read_datafeed '''
