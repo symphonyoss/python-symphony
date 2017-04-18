@@ -87,11 +87,10 @@ class Pod_Group_tests(unittest.TestCase):
         # register response
         httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/admin/group/87654/membership/add",
                                body='{ \
-                                      "userId": 123456, \
-                                      "status": "ACCEPTED", \
-                                      "firstRequestedAt": 1471046357339, \
-                                      "updatedAt": 1471046517684, \
-                                      "requestCounter": 1 \
+                                      "overallResult": "SUCCESS", \
+                                      "results": [ \
+                                         "" \
+                                      ] \
                                      }',
                                status=200,
                                content_type='text/json')
@@ -100,8 +99,7 @@ class Pod_Group_tests(unittest.TestCase):
         # verify return
         response = json.loads(response)
         assert status_code == 200
-        assert response['userId'] == 123456
-        assert response['status'] == "ACCEPTED"
+        assert response['overallResult'] == "SUCCESS"
 
     def test_create_connection(self):
         ''' test pod.create_connection '''
