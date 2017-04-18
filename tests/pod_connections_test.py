@@ -95,7 +95,7 @@ class Pod_Connections_tests(unittest.TestCase):
     def test_create_connection(self):
         ''' test pod.create_connection '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v2/stream/thread_id/message/create",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/connection/create",
                                body='{ \
                                       "userId": 123456, \
                                       "status": "PENDING_OUTGOING", \
