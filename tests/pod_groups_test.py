@@ -132,7 +132,7 @@ class Pod_Group_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.create_connection()
+        status_code, response = self.pod.ib_group_policy_list()
         response = json.loads(response)
         # verify return
         assert status_code == 200
