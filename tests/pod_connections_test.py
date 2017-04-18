@@ -92,27 +92,26 @@ class Pod_Connections_tests(unittest.TestCase):
         assert response['userId'] == 123456
         assert response['status'] == "ACCEPTED"
 
-    def test_send_message(self):
-        ''' test agent.send_message '''
+    def test_create_connection(self):
+        ''' test pod.create_connection '''
         # register response
         httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v2/stream/thread_id/message/create",
-                               body='{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
-                                      "timestamp": "1464627173769", \
-                                      "v2messageType": "V2Message", \
-                                      "streamId": "thread_id", \
-                                      "message": "test string", \
-                                      "attachments": [], \
-                                      "fromUserId": 123456 \
-                                    }',
+                               body='{ \
+                                      "userId": 123456, \
+                                      "status": "PENDING_OUTGOING", \
+                                      "firstRequestedAt": 1471018076255, \
+                                      "updatedAt": 1471018076255, \
+                                      "requestCounter": 1 \
+                                     }',
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.agent.send_message('thread_id', 'TEXT', 'test string')
+        status_code, response = self.pod.create_connection('123456')
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response['streamId'] == 'thread_id'
-        assert response['message'] == 'test string'
+        assert response['userId'] == 123456
+        assert response['status'] == 'PENDING_OUTGOING'
 
 
 if __name__ == '__main__':
