@@ -30,29 +30,41 @@ class Pod_Group_tests(unittest.TestCase):
         self.__keymngr__ = "keys"
         self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
 
-    def test_list_connections(self):
+    def test_ib_group_list(self):
         ''' test pod.list_connections '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/list",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/admin/group/list",
                                body='[{ \
-                                       "userId": 7078106126503, \
-                                       "status": "PENDING_OUTGOING", \
-                                       "updatedAt": 1471018076255 \
+                                       "id": "571db1f2e4b027c4f055a594", \
+                                       "name": "Group 1", \
+                                       "active": true, \
+                                       "memberCount": 1, \
+                                       "policies": [ \
+                                         "571db2e4e4b012df6341f393" \
+                                       ], \
+                                       "createdDate": 1461563890135, \
+                                       "modifiedDate": 1461563926812 \
                                       }, \
                                       { \
-                                       "userId": 7078106103809, \
-                                       "status": "PENDING_INCOMING", \
-                                       "updatedAt": 1467562406219 \
-                                      } \
-                                     ]',
+                                       "id": "571db20ae4b012df6341f391", \
+                                       "name": "Group 2", \
+                                       "active": true, \
+                                       "memberCount": 1, \
+                                       "policies": [ \
+                                         "571db2e4e4b012df6341f393" \
+                                       ], \
+                                       "createdDate": 1461563914581, \
+                                       "modifiedDate": 1461564112286 \
+                                      }]',
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.list_connections()
+        status_code, response = self.pod.ib_group_list()
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response[0]['userId'] == 7078106126503
+        assert response[0]['id'] == "571db1f2e4b027c4f055a594"
+        assert response[1]['id'] == "571db20ae4b012df6341f391"
 
     def test_connection_status(self):
         ''' test pod.connection_status '''
