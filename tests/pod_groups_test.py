@@ -136,7 +136,7 @@ class Pod_Group_tests(unittest.TestCase):
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response[1]['active'] == 'false'
+        assert response[1]['active'] == 'true'
 
 
 if __name__ == '__main__':
