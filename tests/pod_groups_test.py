@@ -101,26 +101,42 @@ class Pod_Group_tests(unittest.TestCase):
         assert status_code == 200
         assert response['overallResult'] == "SUCCESS"
 
-    def test_create_connection(self):
-        ''' test pod.create_connection '''
+    def test_ib_group_policy_list(self):
+        ''' test pod.ib_group_policy_list '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/connection/create",
-                               body='{ \
-                                      "userId": 123456, \
-                                      "status": "PENDING_OUTGOING", \
-                                      "firstRequestedAt": 1471018076255, \
-                                      "updatedAt": 1471018076255, \
-                                      "requestCounter": 1 \
-                                     }',
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/admin/policy/list",
+                               body='[ \
+                                       { \
+                                         "id": "56e9df05e4b00737e3d3b82d", \
+                                         "policyType": "BLOCK", \
+                                         "active": true, \
+                                         "groups": [ \
+                                           "56e9def8e4b0b406041812e6", \
+                                           "56e9deffe4b0b406041812e7" \
+                                         ], \
+                                         "createdDate": 1458167557358, \
+                                         "modifiedDate": 1458330606752 \
+                                       }, \
+                                       { \
+                                         "id": "56a27ae0e4b0d291cbc791ca", \
+                                         "policyType": "BLOCK", \
+                                         "active": false, \
+                                         "groups": [ \
+                                           "56a27ad9e4b0d291cbc791c7", \
+                                           "56a27adce4b09d0919f74c44" \
+                                         ], \
+                                         "createdDate": 1453488864464, \
+                                         "modifiedDate": 1453488865296 \
+                                       } \
+                                     ]',
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.create_connection('123456')
+        status_code, response = self.pod.create_connection()
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response['userId'] == 123456
-        assert response['status'] == 'PENDING_OUTGOING'
+        assert response[1]['active'] == 'false'
 
 
 if __name__ == '__main__':
