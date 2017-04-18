@@ -104,7 +104,7 @@ class Pod_Group_tests(unittest.TestCase):
     def test_ib_group_policy_list(self):
         ''' test pod.ib_group_policy_list '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/admin/policy/list",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/admin/policy/list",
                                body='[ \
                                        { \
                                          "id": "56e9df05e4b00737e3d3b82d", \
