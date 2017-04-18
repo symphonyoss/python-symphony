@@ -71,32 +71,26 @@ class Pod_Connections_tests(unittest.TestCase):
         assert status_code == 200
         assert response['status'] == "ACCEPTED"
 
-    def test_read_datafeed(self):
-        ''' test agent.read_datafeed '''
+    def test_accept_connection(self):
+        ''' test pod.accept_connection '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "agent/v1/datafeed/datafeed_id/read",
-                               body='[{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
-                                       "timestamp": "1464627173769", \
-                                       "v2messageType": "V2Message", \
-                                       "streamId": "thread_id", \
-                                       "message": "test string 1", \
-                                       "attachments": [], \
-                                       "fromUserId": 123456 \
-                                      },\
-                                      {"id": "9zJFGHJGHGHGHMzz2afLLL___fazkemesA", \
-                                       "timestamp": "1464627173923", \
-                                       "v2messageType": "V2Message", \
-                                       "streamId": "thread_id", \
-                                       "message": "test string 2", \
-                                       "attachments": [], \
-                                       "fromUserId": 234567 \
-                                      }]',
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/connection/accept",
+                               body='{ \
+                                      "userId": 123456, \
+                                      "status": "ACCEPTED", \
+                                      "firstRequestedAt": 1471046357339, \
+                                      "updatedAt": 1471046517684, \
+                                      "requestCounter": 1 \
+                                     }',
                                status=200,
                                content_type='text/json')
         # run query
-        status_code, response = self.agent.read_datafeed('datafeed_id')
+        status_code, response = self.pod.accept_connection('123456')
         # verify return
+        response = json.loads(response)
         assert status_code == 200
+        assert response['userId'] == 123456
+        assert response['status'] == "ACCEPTED"
 
     def test_send_message(self):
         ''' test agent.send_message '''
