@@ -11,3 +11,4 @@ lxml
 configparser
 bs4
 pyopenssl
+httpretty

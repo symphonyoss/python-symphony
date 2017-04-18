@@ -104,7 +104,7 @@ Example File Header::
         '''
         
         __author__ = 'Matt Joyce'
-        __email__ = 'matt@nycresistor.com'
+        __email__ = 'matt@joyce.nyc'
         __copyright__   = "Copyright 2016, Example Co."
         
         import os
