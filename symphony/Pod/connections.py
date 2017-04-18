@@ -10,16 +10,13 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import json
-
 
 def list_connections(self):
     ''' list connections '''
     req_hook = 'pod/v1/connection/list?status=all'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    connections = json.loads(response)
-    return connections
+    return status_code, response
 
 
 def connection_status(self, userid):
@@ -27,8 +24,7 @@ def connection_status(self, userid):
     req_hook = 'pod/v1/connection/' + userid + '/info'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    connection_status = json.loads(response)
-    return connection_status
+    return status_code, response
 
 
 def accept_connection(self, userid):
