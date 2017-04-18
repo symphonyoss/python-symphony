@@ -3,7 +3,7 @@
 
 '''
     Purpose:
-        Unit Tests for Agent Methods
+        Unit Tests for Pod Connections Methods
             - list_connections
             - connection_status
             - accept_connection
