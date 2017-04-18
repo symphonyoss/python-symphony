@@ -16,6 +16,7 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2017, Symphony Communication Services LLC'
 
 import httpretty
+import json
 import unittest
 import symphony
 
@@ -38,8 +39,10 @@ class Pod_Users_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        response = self.pod.get_userid_by_email('test@fake.pod')
+        status_code, response = self.pod.get_userid_by_email('test@fake.pod')
+        response = json.loads(response)
         # verify return
+        assert status_code == 200
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
@@ -51,8 +54,10 @@ class Pod_Users_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        response = self.pod.get_user_id_by_user('testuser')
+        status_code, response = self.pod.get_user_id_by_user('testuser')
+        response = json.loads(response)
         # verify return
+        assert status_code == 200
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
