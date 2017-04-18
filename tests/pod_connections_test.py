@@ -34,7 +34,17 @@ class Pod_Connections_tests(unittest.TestCase):
         ''' test agent.test_echo'''
         # register response
         httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/list?status=all",
-                               body='',
+                               body='[{ \
+                                       "userId": 7078106126503, \
+                                       "status": "PENDING_OUTGOING", \
+                                       "updatedAt": 1471018076255 \
+                                      }, \
+                                      { \
+                                       "userId": 7078106103809, \
+                                       "status": "PENDING_INCOMING", \
+                                       "updatedAt": 1467562406219 \
+                                      } \
+                                     ]',
                                status=200,
                                content_type='text/json')
         # run test query
@@ -42,7 +52,7 @@ class Pod_Connections_tests(unittest.TestCase):
         response = json.loads(response)
         # verify return
         assert status_code == 200
-        assert response['message'] == "test string"
+        assert response[0]['userId'] == 7078106126503
 
     def test_connection_status(self):
         ''' test agent.create_datafeed '''
