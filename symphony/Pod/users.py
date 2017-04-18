@@ -18,7 +18,7 @@ def get_userid_by_email(self, email):
     req_hook = 'pod/v1/user'
     req_args = '?email=' + email
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return json.loads(response)
+    return status_code, response
 
 
 def get_user_id_by_user(self, username):
@@ -26,7 +26,7 @@ def get_user_id_by_user(self, username):
     req_hook = 'pod/v1/user/name/' + username + '/get'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return json.loads(response)
+    return status_code, response
 
 
 def adduser_to_stream(self, streamid, userid):
@@ -57,7 +57,7 @@ def list_features(self):
     req_hook = 'pod/v1/admin/system/features/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return status_code, json.loads(response)
+    return status_code, response
 
 
 def search_user(self, search_str, search_filter, local):
@@ -77,4 +77,4 @@ def list_apps(self):
     req_hook = 'pod/v1/admin/app/entitlement/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return status_code, json.loads(response)
+    return status_code, response
