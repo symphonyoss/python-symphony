@@ -29,7 +29,7 @@ def ib_group_member_list(self, group_id):
     return status_code, response
 
 
-def if_group_member_add(self, group_id, userids):
+def ib_group_member_add(self, group_id, userids):
     ''' ib group member add '''
     req_hook = 'pod/v1/admin/group/' + group_id + '/membership/add'
     req_args = {'usersListId': userids}

@@ -67,7 +67,7 @@ class Pod_Group_tests(unittest.TestCase):
         assert response[1]['id'] == "571db20ae4b012df6341f391"
 
     def test_ib_group_member_list(self):
-        ''' test pod.connection_status '''
+        ''' test pod.ib_group_member_list '''
         # register response
         httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/admin/group/87654/membership/list",
                                body='[ \
@@ -82,10 +82,10 @@ class Pod_Group_tests(unittest.TestCase):
         assert status_code == 200
         assert response[0] == 123456
 
-    def test_accept_connection(self):
-        ''' test pod.accept_connection '''
+    def test_ib_group_member_add(self):
+        ''' test pod.ib_group_member_add '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/connection/accept",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/admin/group/87654/membership/add",
                                body='{ \
                                       "userId": 123456, \
                                       "status": "ACCEPTED", \
@@ -96,7 +96,7 @@ class Pod_Group_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run query
-        status_code, response = self.pod.accept_connection('123456')
+        status_code, response = self.pod.ib_group_member_add('87654', ['123457', '567890'])
         # verify return
         response = json.loads(response)
         assert status_code == 200
