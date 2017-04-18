@@ -66,22 +66,21 @@ class Pod_Group_tests(unittest.TestCase):
         assert response[0]['id'] == "571db1f2e4b027c4f055a594"
         assert response[1]['id'] == "571db20ae4b012df6341f391"
 
-    def test_connection_status(self):
+    def test_ib_group_member_list(self):
         ''' test pod.connection_status '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/connection/123456/info",
-                               body='{ \
-                                      "userId": 123456, \
-                                      "status": "ACCEPTED" \
-                                     }',
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/admin/group/87654/membership/list",
+                               body='[ \
+                                      123456 \
+                                     ]',
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.connection_status('123456')
+        status_code, response = self.pod.ib_group_member_list('87654')
         # verify return
         response = json.loads(response)
         assert status_code == 200
-        assert response['status'] == "ACCEPTED"
+        assert response[0] == 123456
 
     def test_accept_connection(self):
         ''' test pod.accept_connection '''
