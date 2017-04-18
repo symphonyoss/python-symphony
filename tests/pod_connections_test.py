@@ -65,7 +65,7 @@ class Pod_Connections_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.connection_status()
+        status_code, response = self.pod.connection_status('123456')
         # verify return
         response = json.loads(response)
         assert status_code == 200
