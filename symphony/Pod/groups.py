@@ -18,7 +18,7 @@ def ib_group_list(self):
     req_hook = 'pod/v1/admin/group/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return status_code, json.loads(response)
+    return status_code, response
 
 
 def ib_group_member_list(self, group_id):
@@ -26,7 +26,7 @@ def ib_group_member_list(self, group_id):
     req_hook = 'pod/v1/admin/group/' + group_id + '/membership/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return status_code, json.loads(response)
+    return status_code, response
 
 
 def if_group_member_add(self, group_id, userids):
@@ -43,4 +43,4 @@ def ib_group_policy_list(self):
     req_hook = 'pod/v1/admin/policy/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
-    return status_code, json.loads(response)
+    return status_code, response
