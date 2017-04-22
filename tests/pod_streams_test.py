@@ -124,8 +124,8 @@ class Pod_Users_tests(unittest.TestCase):
                     }
         status_code, response = self.pod.create_room(room_data)
         assert status_code == 200
-        response = json.loads(response)
-        assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        data = json.loads(response)
+        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_update_room(self):
         ''' test update_room '''
@@ -171,8 +171,8 @@ class Pod_Users_tests(unittest.TestCase):
                     }
         status_code, response = self.pod.update_room(stream_id, room_data)
         assert status_code == 200
-        response = json.loads(response)
-        assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        data = json.loads(response)
+        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_room_info(self):
         ''' test room_info '''
@@ -209,9 +209,9 @@ class Pod_Users_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         status_code, response = self.pod.room_info(stream_id)
-        response = json.loads(response)
+        data = json.loads(response)
         assert status_code == 200
-        assert response['roomSystemInfo']['id'] == "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA"
+        assert data['roomSystemInfo']['id'] == "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA"
 
     def test_activate_stream(self):
         ''' test activate_stream '''
@@ -242,9 +242,9 @@ class Pod_Users_tests(unittest.TestCase):
                                content_type='text/json')
         status_code, response = self.pod.activate_stream(stream_id, status)
         assert status_code == 200
-        response = json.loads(response)
-        assert response['roomSystemInfo']['id'] == "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA"
-        assert response['roomSystemInfo']['active'] is False
+        data = json.loads(response)
+        assert data['roomSystemInfo']['id'] == "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA"
+        assert data['roomSystemInfo']['active'] is False
 
     def test_room_members(self):
         ''' test room members '''
@@ -267,8 +267,8 @@ class Pod_Users_tests(unittest.TestCase):
                                content_type='text/json')
         status_code, response = self.pod.room_members(stream_id)
         assert status_code == 200
-        response = json.loads(response)
-        for member in response:
+        data = json.loads(response)
+        for member in data:
             if member['id'] == 7078106103900:
                 assert member['owner'] is False
 
