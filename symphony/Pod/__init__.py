@@ -36,6 +36,7 @@ class Pod():
     from .streams import search_rooms
     from .streams import stream_info
     from .streams import list_streams
+    from .streams import stream_members
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
