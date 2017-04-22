@@ -238,6 +238,32 @@ class Pod_Users_tests(unittest.TestCase):
         assert response['roomSystemInfo']['id'] == "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA"
         assert response['roomSystemInfo']['active'] is False
 
+    def test_room_members(self):
+        ''' test room members '''
+        stream_id = 'HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA'
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v2/room/' + str(stream_id) + '/membership/list',
+                               body='[ \
+                                       { \
+                                         "id": 7078106103900, \
+                                         "owner": false, \
+                                         "joinDate": 1461430710531 \
+                                       }, \
+                                       { \
+                                         "id": 7078106103809, \
+                                         "owner": true, \
+                                         "joinDate": 1461426797875 \
+                                       } \
+                                     ]',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.room_members(stream_id)
+        assert status_code == 200
+        response = json.loads(response)
+        for member in response:
+            if member['id'] == 7078106103900:
+                assert member['owner'] is False
+
 
 if __name__ == '__main__':
     unittest.main()
