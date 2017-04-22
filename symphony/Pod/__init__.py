@@ -24,6 +24,9 @@ class Pod():
     # streams methods
     from .streams import adduser_to_stream
     from .streams import create_stream
+    from .streams import create_stream_ni
+    from .streams import create_room
+    from .streams import update_room
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
