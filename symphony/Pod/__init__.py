@@ -23,6 +23,7 @@ class Pod():
     from .users import search_user
     # streams methods
     from .streams import adduser_to_stream
+    from .streams import create_stream
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
