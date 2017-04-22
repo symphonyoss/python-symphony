@@ -31,6 +31,8 @@ class Pod():
     from .streams import room_info
     from .streams import activate_stream
     from .streams import room_members
+    from .streams import promote_owner
+    from .streams import demote_owner
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
