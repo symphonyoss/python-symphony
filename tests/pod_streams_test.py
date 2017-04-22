@@ -51,6 +51,30 @@ class Pod_Users_tests(unittest.TestCase):
         # verify return
         assert status_code == 200
 
+    def test_promote_owner(self):
+        ''' test promote_owner '''
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/remove",
+                               body='{ "format": "TEXT", "message": "Member promoted to owner" }',
+                               status=200,
+                               content_type='text/json')
+        # run test query
+        status_code, response = self.pod.promte_owner('stream_id', '123456')
+        # verify return
+        assert status_code == 200
+
+    def test_demote_owner(self):
+        ''' test member_remove '''
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/remove",
+                               body='{ "format": "TEXT", "message": "Member demoted to participant" }',
+                               status=200,
+                               content_type='text/json')
+        # run test query
+        status_code, response = self.pod.demote_owner('stream_id', '123456')
+        # verify return
+        assert status_code == 200
+
     def test_create_stream(self):
         ''' test create_stream '''
         # register response
