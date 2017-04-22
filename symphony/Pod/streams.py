@@ -99,3 +99,29 @@ def demote_owner(self, stream_id, user_id):
     req_args = '{ "id": %s }' % user_id
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
+def search_rooms(self, query, labels=None, active=True, creator=None, skip=None, limit=None):
+    ''' search rooms '''
+    req_hook = 'pod/v2/room/search?skip=' + skip + '&limit=' + limit
+    json_query = {
+                   "query": query,
+                   "labels": labels,
+                   "active": active,
+                   "creator": creator
+                 }
+    req_args = json.dumps(json_query)
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response
+
+
+def list_streams(self, types, inactive=False):
+    ''' list user streams '''
+    req_hook = 'pod/v1/streams/list'
+    json_query = {
+                   "streamTypes": types,
+                   "includeInactiveStreams": inactive
+                 }
+    req_args = json.dumps(json_query)
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response
