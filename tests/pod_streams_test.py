@@ -61,6 +61,7 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.create_stream()
         assert status_code == 200
         response = json.loads(response)
+        print response
         assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_create_stream_ni(self):
@@ -74,6 +75,7 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.create_stream_ni(userids)
         assert status_code == 200
         response = json.loads(response)
+        print response
         assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_create_room(self):
@@ -213,8 +215,8 @@ class Pod_Users_tests(unittest.TestCase):
         assert status_code == 200
         assert response['roomSystemInfo']['id'] == "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA"
 
-    def test_activate_room(self):
-        ''' test activate_info '''
+    def test_activate_strem(self):
+        ''' test activate_stream '''
         stream_id = 'HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA'
         status = False
         # register response
@@ -240,7 +242,7 @@ class Pod_Users_tests(unittest.TestCase):
                                      }',
                                status=200,
                                content_type='text/json')
-        status_code, response = self.pod.activate_room(stream_id, status)
+        status_code, response = self.pod.activate_stream(stream_id, status)
         assert status_code == 200
         response = json.loads(response)
         assert response['roomSystemInfo']['id'] == "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA"
