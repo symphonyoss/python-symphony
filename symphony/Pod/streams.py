@@ -13,9 +13,9 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 import json
 
 
-def adduser_to_stream(self, streamid, userid):
+def adduser_to_stream(self, stream_id, userid):
     ''' add a user to a stream '''
-    req_hook = 'pod/v1/room/' + streamid + '/membership/add'
+    req_hook = 'pod/v1/room/' + str(stream_id) + '/membership/add'
     req_args = '{ "id": %s }' % userid
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
@@ -47,7 +47,7 @@ def create_room(self, room_definition):
 
 def update_room(self, stream_id, room_definition):
     ''' update a room definition '''
-    req_hook = 'pod/v2/room/' + stream_id + '/update'
+    req_hook = 'pod/v2/room/' + str(stream_id) + '/update'
     req_args = json.dumps(room_definition)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
@@ -55,15 +55,23 @@ def update_room(self, stream_id, room_definition):
 
 def room_info(self, stream_id):
     ''' get info on room '''
-    req_hook = 'pod/v2/room/' + stream_id + '/info'
+    req_hook = 'pod/v2/room/' + str(stream_id) + '/info'
     req_args = None
-    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
     return status_code, response
 
 
 def activate_stream(self, stream_id, status):
     ''' de/reactivate a stream '''
-    req_hook = 'pod/v1/room/' + stream_id + '/setActive?active=' + self.__rest__.bool2str(status)
+    req_hook = 'pod/v1/room/' + str(stream_id) + '/setActive?active=' + self.__rest__.bool2str(status)
     req_args = None
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response
+
+
+def room_members(self, stream_id):
+    ''' get list of room members '''
+    req_hook = 'pod/v2/room/' + str(stream_id) + '/membership/list'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
     return status_code, response

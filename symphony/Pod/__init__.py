@@ -29,6 +29,7 @@ class Pod():
     from .streams import update_room
     from .streams import room_info
     from .streams import activate_stream
+    from .streams import room_members
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
