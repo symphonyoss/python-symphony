@@ -125,3 +125,11 @@ def list_streams(self, types, inactive=False):
     req_args = json.dumps(json_query)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
+def stream_info(self, stream_id):
+    ''' get stream info '''
+    req_hook = 'pod/v1/streams/' + stream_id + '/info'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, response
