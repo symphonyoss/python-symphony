@@ -133,3 +133,11 @@ def stream_info(self, stream_id):
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
     return status_code, response
+
+
+def stream_members(self, stream_id):
+    ''' get stream members '''
+    req_hook = 'pod/v1/admin/stream/' + stream_id + '/membership/list'
+    req_args = None
+    status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, response
