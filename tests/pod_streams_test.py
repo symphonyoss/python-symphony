@@ -125,7 +125,7 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.create_room(room_data)
         assert status_code == 200
         data = json.loads(response)
-        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        assert data['roomSystemInfo']['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_update_room(self):
         ''' test update_room '''
@@ -172,7 +172,7 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.update_room(stream_id, room_data)
         assert status_code == 200
         data = json.loads(response)
-        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        assert data['roomSystemInfo']['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_room_info(self):
         ''' test room_info '''
