@@ -54,7 +54,7 @@ class Pod_Users_tests(unittest.TestCase):
     def test_promote_owner(self):
         ''' test promote_owner '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/remove",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/promoteOwner",
                                body='{ "format": "TEXT", "message": "Member promoted to owner" }',
                                status=200,
                                content_type='text/json')
@@ -66,7 +66,7 @@ class Pod_Users_tests(unittest.TestCase):
     def test_demote_owner(self):
         ''' test member_remove '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/remove",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/demoteOwner",
                                body='{ "format": "TEXT", "message": "Member demoted to participant" }',
                                status=200,
                                content_type='text/json')
