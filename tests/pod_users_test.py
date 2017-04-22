@@ -61,18 +61,6 @@ class Pod_Users_tests(unittest.TestCase):
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
-    def test_adduser_to_stream(self):
-        ''' test adduser_to_stream '''
-        # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/add",
-                               body='{ "format": "TEXT", "message": "Member added" }',
-                               status=200,
-                               content_type='text/json')
-        # run test query
-        status_code, response = self.pod.adduser_to_stream('stream_id', '123456')
-        # verify return
-        assert status_code == 200
-
     def test_user_feature_update(self):
         ''' test user_feature_update '''
         # register response
