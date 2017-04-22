@@ -20,7 +20,7 @@ class RESTful():
         self.__session__ = session
         self.__keymngr__ = keymngr
 
-    def bool2str(boolval):
+    def bool2str(self, boolval):
         if boolval:
             return 'true'
         else:

@@ -215,7 +215,7 @@ class Pod_Users_tests(unittest.TestCase):
         assert status_code == 200
         assert response['roomSystemInfo']['id'] == "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA"
 
-    def test_activate_strem(self):
+    def test_activate_stream(self):
         ''' test activate_stream '''
         stream_id = 'HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA'
         status = False
