@@ -22,7 +22,8 @@ class Pod():
     from .users import user_feature_update
     from .users import search_user
     # streams methods
-    from .streams import adduser_to_stream
+    from .streams import member_add
+    from .streams import member_remove
     from .streams import create_stream
     from .streams import create_stream_ni
     from .streams import create_room

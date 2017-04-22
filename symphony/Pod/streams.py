@@ -13,9 +13,17 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 import json
 
 
-def adduser_to_stream(self, stream_id, userid):
+def member_add(self, stream_id, userid):
     ''' add a user to a stream '''
     req_hook = 'pod/v1/room/' + str(stream_id) + '/membership/add'
+    req_args = '{ "id": %s }' % userid
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response
+
+
+def member_remove(self, stream_id, userid):
+    ''' remove user from stream '''
+    req_hook = 'pod/v1/room/' + str(stream_id) + '/membership/remove'
     req_args = '{ "id": %s }' % userid
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
