@@ -3,12 +3,8 @@
 
 '''
     Purpose:
-        Unit Tests for Pod Methods related to Users
-            - get_userid_by_email
-            - get_user_id_by_user
+        Unit Tests for Pod Methods related to Streams
             - adduser_to_stream
-            - user_feature_update
-            - search_user
 '''
 
 __author__ = 'Matt Joyce'
