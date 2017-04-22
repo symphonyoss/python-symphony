@@ -59,7 +59,7 @@ class Pod_Users_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.promte_owner('stream_id', '123456')
+        status_code, response = self.pod.promote_owner('stream_id', '123456')
         # verify return
         assert status_code == 200
 
