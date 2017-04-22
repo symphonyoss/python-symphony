@@ -60,9 +60,8 @@ class Pod_Users_tests(unittest.TestCase):
                                content_type='text/json')
         status_code, response = self.pod.create_stream()
         assert status_code == 200
-        response = json.loads(response)
-        print response
-        assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        data = json.loads(response)
+        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_create_stream_ni(self):
         ''' test create_stream_ni '''
@@ -74,9 +73,8 @@ class Pod_Users_tests(unittest.TestCase):
         userids = [123456, 567890]
         status_code, response = self.pod.create_stream_ni(userids)
         assert status_code == 200
-        response = json.loads(response)
-        print response
-        assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+        data = json.loads(response)
+        assert data['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
     def test_create_room(self):
         ''' test create_room '''
