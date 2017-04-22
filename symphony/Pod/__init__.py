@@ -27,6 +27,7 @@ class Pod():
     from .streams import create_stream_ni
     from .streams import create_room
     from .streams import update_room
+    from .streams import room_info
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list

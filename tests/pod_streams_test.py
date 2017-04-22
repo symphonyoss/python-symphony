@@ -166,6 +166,43 @@ class Pod_Users_tests(unittest.TestCase):
         response = json.loads(response)
         assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
+    def test_room_info(self):
+        ''' test room_info '''
+        stream_id = ''
+        # register response
+        httpretty.register_uri(httpretty.GET, self.__uri__ + 'pod/v2/room/' + stream_id + '/info',
+                               body='{ \
+                                       "roomAttributes": { \
+                                         "name": "API room v2", \
+                                         "keywords": [ \
+                                           { \
+                                             "key": "region", \
+                                             "value": "EMEA" \
+                                           }, \
+                                           { \
+                                             "key": "lead", \
+                                             "value": "Daffy Duck" \
+                                           } \
+                                         ], \
+                                         "description": "Updated via the API", \
+                                         "membersCanInvite": true, \
+                                         "discoverable": true, \
+                                         "readOnly": false, \
+                                         "copyProtected": true, \
+                                         "public": false \
+                                       }, \
+                                       "roomSystemInfo": { \
+                                         "id": "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA", \
+                                         "creationDate": 1464448273802, \
+                                         "createdByUserId": 7215545078229, \
+                                         "active": true \
+                                       } \
+                                     }',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.room_info(stream_id)
+        assert status_code == 200
+
 
 if __name__ == '__main__':
     unittest.main()
