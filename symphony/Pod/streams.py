@@ -43,3 +43,11 @@ def create_room(self, room_definition):
     req_args = json.dumps(room_definition)
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
+def update_room(self, stream_id, room_definition):
+    ''' update a room definition '''
+    req_hook = 'pod/v2/room/' + stream_id + '/update'
+    req_args = json.dumps(room_definition)
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response

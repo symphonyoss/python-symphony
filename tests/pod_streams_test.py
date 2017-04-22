@@ -119,6 +119,53 @@ class Pod_Users_tests(unittest.TestCase):
         response = json.loads(response)
         assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
 
+    def test_update_room(self):
+        ''' test update_room '''
+        stream_id = 'w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA'
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v2/room/' + stream_id + '/update',
+                               body='{ \
+                                       "roomAttributes": { \
+                                         "name": "API room v2", \
+                                         "keywords": [ \
+                                           { \
+                                             "key": "region", \
+                                             "value": "EMEA" \
+                                           }, \
+                                           { \
+                                             "key": "lead", \
+                                             "value": "Daffy Duck" \
+                                           } \
+                                         ], \
+                                         "description": "Updated via the API", \
+                                         "membersCanInvite": true, \
+                                         "discoverable": true, \
+                                         "readOnly": false, \
+                                         "copyProtected": true, \
+                                         "public": false \
+                                       }, \
+                                       "roomSystemInfo": { \
+                                         "id": "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA", \
+                                         "creationDate": 1464448273802, \
+                                         "createdByUserId": 7215545078229, \
+                                         "active": true \
+                                       } \
+                                     }',
+                               status=200,
+                               content_type='text/json')
+        room_data = {
+                       "description": "Updated via the API",
+                       "keywords": [
+                                      {"key": "region", "value": "EMEA"},
+                                      {"key": "lead", "value": "Daffy Duck"}
+                                   ],
+                       "copyProtected": True
+                    }
+        status_code, response = self.pod.update_room(stream_id, room_data)
+        assert status_code == 200
+        response = json.loads(response)
+        assert response['id'] == 'xhGxbTcvTDK6EIMMrwdOrX___quztr2HdA'
+
 
 if __name__ == '__main__':
     unittest.main()
