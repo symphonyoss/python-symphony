@@ -250,7 +250,7 @@ class Pod_Users_tests(unittest.TestCase):
         ''' test room members '''
         stream_id = 'HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA'
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v2/room/' + str(stream_id) + '/membership/list',
+        httpretty.register_uri(httpretty.GET, self.__uri__ + 'pod/v2/room/' + str(stream_id) + '/membership/list',
                                body='[ \
                                        { \
                                          "id": 7078106103900, \
