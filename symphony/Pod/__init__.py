@@ -19,9 +19,10 @@ class Pod():
     # user methods
     from .users import get_userid_by_email
     from .users import get_user_id_by_user
-    from .users import adduser_to_stream
     from .users import user_feature_update
     from .users import search_user
+    # streams methods
+    from .streams import adduser_to_stream
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
