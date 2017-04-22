@@ -168,7 +168,7 @@ class Pod_Users_tests(unittest.TestCase):
 
     def test_room_info(self):
         ''' test room_info '''
-        stream_id = ''
+        stream_id = 'w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA'
         # register response
         httpretty.register_uri(httpretty.GET, self.__uri__ + 'pod/v2/room/' + stream_id + '/info',
                                body='{ \
@@ -201,7 +201,42 @@ class Pod_Users_tests(unittest.TestCase):
                                status=200,
                                content_type='text/json')
         status_code, response = self.pod.room_info(stream_id)
+        response = json.loads(response)
         assert status_code == 200
+        assert response['roomSystemInfo']['id'] == "w7-C9e34O4EqJJoXnyXLMH___qsIFLKEdA"
+
+    def test_activate_room(self):
+        ''' test activate_info '''
+        stream_id = 'HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA'
+        status = False
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v1/room/' + stream_id + '/setActive',
+                               body='{ \
+                                       "roomAttributes": { \
+                                         "name": "API room", \
+                                         "description": "Updated via the API", \
+                                         "membersCanInvite": true, \
+                                         "discoverable": true \
+                                       }, \
+                                       "roomSystemInfo": { \
+                                         "id": "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA", \
+                                         "creationDate": 1461426797875, \
+                                         "createdByUserId": 7078106103809, \
+                                         "active": false \
+                                       }, \
+                                       "immutableRoomAttributes": { \
+                                         "readOnly": false, \
+                                         "copyProtected": false, \
+                                         "public": false \
+                                       } \
+                                     }',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.activate_room(stream_id, status)
+        assert status_code == 200
+        response = json.loads(response)
+        assert response['roomSystemInfo']['id'] == "HNmksPVAR6-f14WqKXmqHX___qu8LMLgdA"
+        assert response['roomSystemInfo']['active'] is False
 
 
 if __name__ == '__main__':
