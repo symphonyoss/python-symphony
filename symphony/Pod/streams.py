@@ -59,3 +59,11 @@ def room_info(self, stream_id):
     req_args = None
     status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
+
+
+def activate_stream(self, stream_id, status):
+    ''' de/reactivate a stream '''
+    req_hook = 'pod/v1/room/' + stream_id + '/setActive?active=' + self.__rest__.bool2str(status)
+    req_args = None
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
+    return status_code, response
