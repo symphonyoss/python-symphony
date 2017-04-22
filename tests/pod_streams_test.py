@@ -27,15 +27,27 @@ class Pod_Users_tests(unittest.TestCase):
         self.__keymngr__ = "keys"
         self.pod = symphony.Pod(self.__uri__, self.__session__, self.__keymngr__)
 
-    def test_adduser_to_stream(self):
-        ''' test adduser_to_stream '''
+    def test_member_add(self):
+        ''' test member_add '''
         # register response
         httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/add",
                                body='{ "format": "TEXT", "message": "Member added" }',
                                status=200,
                                content_type='text/json')
         # run test query
-        status_code, response = self.pod.adduser_to_stream('stream_id', '123456')
+        status_code, response = self.pod.member_add('stream_id', '123456')
+        # verify return
+        assert status_code == 200
+
+    def test_member_remove(self):
+        ''' test member_remove '''
+        # register response
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/room/stream_id/membership/remove",
+                               body='{ "format": "TEXT", "message": "Member removed" }',
+                               status=200,
+                               content_type='text/json')
+        # run test query
+        status_code, response = self.pod.member_remove('stream_id', '123456')
         # verify return
         assert status_code == 200
 
