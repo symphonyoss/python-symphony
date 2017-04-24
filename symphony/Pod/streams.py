@@ -101,7 +101,7 @@ def demote_owner(self, stream_id, user_id):
     return status_code, response
 
 
-def search_rooms(self, query, labels=None, active=True, creator=None, skip=None, limit=None):
+def search_rooms(self, query, labels=None, active=True, creator=None, skip=0, limit=25):
     ''' search rooms '''
     req_hook = 'pod/v2/room/search?skip=' + skip + '&limit=' + limit
     json_query = {
