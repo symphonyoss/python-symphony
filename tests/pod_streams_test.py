@@ -296,6 +296,177 @@ class Pod_Users_tests(unittest.TestCase):
             if member['id'] == 7078106103900:
                 assert member['owner'] is False
 
+    def test_search_rooms(self):
+        ''' test search_rooms '''
+        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v2/room/search',
+                               body='{ \
+                                       "count": 2, \
+                                       "skip": 0, \
+                                       "limit": 10, \
+                                       "query": { \
+                                         "query": "automobile", \
+                                         "labels": [ \
+                                           "industry" \
+                                         ], \
+                                         "active": true, \
+                                         "creator": { \
+                                           "id": 7696581411197 \
+                                         } \
+                                       }, \
+                                       "rooms": [ \
+                                         { \
+                                           "roomAttributes": { \
+                                             "name": "Automobile Industry Room", \
+                                             "description": "Room to discuss car companies", \
+                                             "membersCanInvite": true, \
+                                             "readOnly": false, \
+                                             "copyProtected": false, \
+                                             "public": false \
+                                           }, \
+                                           "roomSystemInfo": { \
+                                             "id": "tzwvAZIdDMG3ZPRxv+xsgH///qr+JJkWdA==", \
+                                             "creationDate": 1464615003895, \
+                                             "createdByUserId": 7696581411197, \
+                                             "active": true \
+                                           } \
+                                         }, \
+                                         { \
+                                           "roomAttributes": { \
+                                             "name": "Tesla Room", \
+                                             "keywords": [ \
+                                               { \
+                                                 "key": "industry", \
+                                                 "value": "automobile" \
+                                               } \
+                                             ], \
+                                             "description": "Discussions on TSLA", \
+                                             "membersCanInvite": true, \
+                                             "readOnly": false, \
+                                             "copyProtected": false, \
+                                             "public": false \
+                                           }, \
+                                           "roomSystemInfo": { \
+                                             "id": "o6UkQ1TEmU0Tf/DHUlZrCH///qr+JQowdA==", \
+                                             "creationDate": 1464614974947, \
+                                             "createdByUserId": 7696581411197, \
+                                             "active": true \
+                                           } \
+                                         } \
+                                       ], \
+                                       "facetedMatchCount": [ \
+                                         { \
+                                           "facet": "industry", \
+                                           "count": 1 \
+                                         } \
+                                       ] \
+                                     }',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.search_rooms('query text', labels='label', creator='creator')
+        assert status_code == 200
+        data = json.loads(response)
+        print data
+
+    def test_list_streams(self):
+        ''' test list_streams '''
+        httpretty.register_uri(httpretty.POST, self.__uri__ + 'pod/v1/streams/list',
+                               body='[ \
+                                       { \
+                                         "id": "iWyZBIOdQQzQj0tKOLRivX___qu6YeyZdA", \
+                                         "crossPod": false, \
+                                         "active": true, \
+                                         "streamType": { \
+                                           "type": "POST" \
+                                         }, \
+                                         "streamAttributes": { \
+                                           "members": [ \
+                                             7215545078229 \
+                                           ] \
+                                         } \
+                                       } \
+                                     ]',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.list_streams()
+        assert status_code == 200
+        data = json.loads(response)
+        print data
+
+    def test_stream_info(self):
+        ''' test stream_info '''
+        stream_id = 'p9B316LKDto7iOECc8Xuz3___qeWsc0bdA'
+        httpretty.register_uri(httpretty.GET, self.__uri__ + 'pod/v1/streams/' + stream_id + '/info',
+                               body='{ \
+                                       "id": "p9B316LKDto7iOECc8Xuz3___qeWsc0bdA", \
+                                       "crossPod": false, \
+                                       "active": true, \
+                                       "streamType": { \
+                                         "type": "IM" \
+                                       }, \
+                                       "streamAttributes": { \
+                                         "members": [ \
+                                           7627861917905, \
+                                           7627861925698 \
+                                         ] \
+                                       } \
+                                     }',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.stream_info(stream_id)
+        assert status_code == 200
+        data = json.loads(response)
+        assert data['id'] == stream_id
+
+    def test_stream_members(self):
+        ''' test stream_members '''
+        stream_id = 'stream_id'
+        httpretty.register_uri(httpretty.GET, self.__uri__ + 'pod/v1/admin/stream/' + stream_id + '/membership/list',
+                               body='{ \
+                                       "count": 2, \
+                                       "skip": 0, \
+                                       "limit": 100, \
+                                       "members": [ \
+                                         { \
+                                         "user": { \
+                                           "userId": 8933531975688, \
+                                           "email": "john.doe@acme.com", \
+                                           "firstName": "John", \
+                                           "lastName": "Doe", \
+                                           "displayName": "John Doe", \
+                                           "company": "Acme", \
+                                           "companyId": 130, \
+                                           "isExternal": false \
+                                         }, \
+                                         "isOwner": false, \
+                                         "isCreator": false, \
+                                         "joinDate": 1485366753320 \
+                                       }, \
+                                       { \
+                                         "user": { \
+                                           "userId": 8933531975689, \
+                                           "email": "alice.smith@gotham.com", \
+                                           "firstName": "Alice", \
+                                           "lastName": "Smith", \
+                                           "displayName": "Alice Smith", \
+                                           "company": "Gotham", \
+                                           "companyId": 131, \
+                                           "isExternal": true \
+                                         }, \
+                                         "isOwner": true, \
+                                         "isCreator": true, \
+                                         "joinDate": 1485366753279 \
+                                       } \
+                                     ] \
+                                   }',
+                               status=200,
+                               content_type='text/json')
+        status_code, response = self.pod.stream_members(stream_id)
+        assert status_code == 200
+        data = json.loads(response)
+        for user in data['members']:
+            if user['userId'] == 8933531975689:
+                assert user['companyId'] == 131
+
 
 if __name__ == '__main__':
     unittest.main()
