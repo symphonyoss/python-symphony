@@ -34,7 +34,7 @@ class Pod_Users_tests(unittest.TestCase):
     def test_get_userid_by_email(self):
         ''' test get_user_id_by_email '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/user",
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=200,
                                content_type='text/json')
@@ -49,7 +49,7 @@ class Pod_Users_tests(unittest.TestCase):
     def test_get_user_id_by_user(self):
         ''' test get_user_id_by_user '''
         # register response
-        httpretty.register_uri(httpretty.GET, "http://fake.pod/pod/v1/user/name/testuser/get",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "pod/v1/user/name/testuser/get",
                                body='{"id": 123456, "emailAddress": "test@fake.pod" }',
                                status=200,
                                content_type='text/json')
@@ -61,22 +61,10 @@ class Pod_Users_tests(unittest.TestCase):
         assert response['id'] == 123456
         assert response['emailAddress'] == "test@fake.pod"
 
-    def test_adduser_to_stream(self):
-        ''' test adduser_to_stream '''
-        # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/room/stream_id/membership/add",
-                               body='{ "format": "TEXT", "message": "Member added" }',
-                               status=200,
-                               content_type='text/json')
-        # run test query
-        status_code, response = self.pod.adduser_to_stream('stream_id', '123456')
-        # verify return
-        assert status_code == 200
-
     def test_user_feature_update(self):
         ''' test user_feature_update '''
         # register response
-        httpretty.register_uri(httpretty.POST, "http://fake.pod/pod/v1/admin/user/123456/features/update",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "pod/v1/admin/user/123456/features/update",
                                body='{ "format": "TEXT", "message": "OK" }',
                                status=200,
                                content_type='text/json')

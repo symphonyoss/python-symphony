@@ -19,3 +19,9 @@ class RESTful():
         self.__url__ = url
         self.__session__ = session
         self.__keymngr__ = keymngr
+
+    def bool2str(self, boolval):
+        if boolval:
+            return 'true'
+        else:
+            return 'false'

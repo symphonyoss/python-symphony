@@ -29,21 +29,6 @@ def get_user_id_by_user(self, username):
     return status_code, response
 
 
-def adduser_to_stream(self, streamid, userid):
-    ''' add a user to a stream '''
-    req_hook = 'pod/v1/room/' + streamid + '/membership/add'
-    req_args = '{ "id": %s }' % userid
-    status_code, response = self.__rest__.POST_query(req_hook, req_args)
-    return status_code, response
-
-
-def user_feature_update(self, userid, req_args):
-    ''' update features by user id '''
-    req_hook = 'pod/v1/admin/user/' + str(userid) + '/features/update'
-    status_code, response = self.__rest__.POST_query(req_hook, req_args)
-    return status_code, response
-
-
 def user_presence(self, userid):
     ''' check on presence of a user '''
     req_hook = 'pod/v2/user/' + str(userid) + '/presence'
@@ -57,6 +42,13 @@ def list_features(self):
     req_hook = 'pod/v1/admin/system/features/list'
     req_args = None
     status_code, response = self.__rest__.GET_query(req_hook, req_args)
+    return status_code, response
+
+
+def user_feature_update(self, userid, req_args):
+    ''' update features by user id '''
+    req_hook = 'pod/v1/admin/user/' + str(userid) + '/features/update'
+    status_code, response = self.__rest__.POST_query(req_hook, req_args)
     return status_code, response
 
 

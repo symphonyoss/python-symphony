@@ -19,9 +19,24 @@ class Pod():
     # user methods
     from .users import get_userid_by_email
     from .users import get_user_id_by_user
-    from .users import adduser_to_stream
     from .users import user_feature_update
     from .users import search_user
+    # streams methods
+    from .streams import member_add
+    from .streams import member_remove
+    from .streams import create_stream
+    from .streams import create_stream_ni
+    from .streams import create_room
+    from .streams import update_room
+    from .streams import room_info
+    from .streams import activate_stream
+    from .streams import room_members
+    from .streams import promote_owner
+    from .streams import demote_owner
+    from .streams import search_rooms
+    from .streams import stream_info
+    from .streams import list_streams
+    from .streams import stream_members
     # group methods
     from .groups import ib_group_list
     from .groups import ib_group_member_list
