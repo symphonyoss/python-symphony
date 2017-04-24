@@ -115,7 +115,7 @@ def search_rooms(self, query, labels=None, active=True, creator=None, skip=0, li
     return status_code, response
 
 
-def list_streams(self, types, inactive=False):
+def list_streams(self, types=[], inactive=False):
     ''' list user streams '''
     req_hook = 'pod/v1/streams/list'
     json_query = {
