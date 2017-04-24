@@ -11,7 +11,7 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import symphony
-import Users
+from users import Users
 
 
 class Pod(Users):
