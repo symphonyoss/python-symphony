@@ -16,11 +16,10 @@ from users import Users
 from streams import Streams
 from groups import Groups
 from connections import Connections
+from base import Base
 
 
-class Pod(Users, Streams, Groups, Connections):
-    # basic methods
-    from .base import sessioninfo
+class Pod(Base, Users, Streams, Groups, Connections):
 
     def __init__(self, url, session, keymngr):
         self.__url__ = url
