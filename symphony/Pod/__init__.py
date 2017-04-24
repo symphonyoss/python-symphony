@@ -13,16 +13,12 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 import symphony
 from users import Users
 from streams import Streams
+from groups import Groups
 
 
-class Pod(Users, Streams):
+class Pod(Users, Streams, Groups):
     # basic methods
     from .base import sessioninfo
-    # group methods
-    from .groups import ib_group_list
-    from .groups import ib_group_member_list
-    from .groups import ib_group_member_add
-    from .groups import ib_group_policy_list
     # connection methods
     from .connections import list_connections
     from .connections import connection_status

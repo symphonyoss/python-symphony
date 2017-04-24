@@ -17,7 +17,6 @@ class Streams(object):
 
     def __init__(self, *args, **kwargs):
         super(Streams, self).__init__(*args, **kwargs)
-        self.items = []
 
     def member_add(self, stream_id, user_id):
         ''' add a user to a stream '''
