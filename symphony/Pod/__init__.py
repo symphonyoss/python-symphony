@@ -14,16 +14,12 @@ import symphony
 from users import Users
 from streams import Streams
 from groups import Groups
+from connections import Connections
 
 
-class Pod(Users, Streams, Groups):
+class Pod(Users, Streams, Groups, Connections):
     # basic methods
     from .base import sessioninfo
-    # connection methods
-    from .connections import list_connections
-    from .connections import connection_status
-    from .connections import accept_connection
-    from .connections import create_connection
 
     def __init__(self, url, session, keymngr):
         self.__url__ = url
