@@ -365,7 +365,7 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.search_rooms('query text', labels='label', creator='creator')
         assert status_code == 200
         data = json.loads(response)
-        print data
+        assert data['count'] == 2
 
     def test_list_streams(self):
         ''' test list_streams '''
@@ -390,7 +390,8 @@ class Pod_Users_tests(unittest.TestCase):
         status_code, response = self.pod.list_streams()
         assert status_code == 200
         data = json.loads(response)
-        print data
+        assert data[0]['active'] is True
+        assert data[0]['crossPod'] is False
 
     def test_stream_info(self):
         ''' test stream_info '''
