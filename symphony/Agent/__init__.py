@@ -13,13 +13,10 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import symphony
 
+from base import Base
 
-class Agent():
-    from .base import remove_control_characters
-    from .base import test_echo
-    from .base import create_datafeed
-    from .base import read_datafeed
-    from .base import send_message
+
+class Agent(Base):
 
     def __init__(self, url, session, keymngr):
         self.__url__ = url

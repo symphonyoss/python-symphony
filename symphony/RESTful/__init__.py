@@ -10,10 +10,10 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
+from nopkcs import NOPKCS
 
-class RESTful():
-    from .base import GET_query
-    from .base import POST_query
+
+class RESTful(NOPKCS):
 
     def __init__(self, url, session, keymngr):
         self.__url__ = url
