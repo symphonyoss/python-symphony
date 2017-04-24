@@ -11,6 +11,7 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import symphony
+
 from users import Users
 from streams import Streams
 from groups import Groups
