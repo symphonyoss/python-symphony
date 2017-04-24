@@ -11,16 +11,12 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import symphony
+import Users
 
 
-class Pod():
+class Pod(Users):
     # basic methods
     from .base import sessioninfo
-    # user methods
-    from .users import get_userid_by_email
-    from .users import get_user_id_by_user
-    from .users import user_feature_update
-    from .users import search_user
     # streams methods
     from .streams import member_add
     from .streams import member_remove
