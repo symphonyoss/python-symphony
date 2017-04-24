@@ -11,14 +11,17 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 from nopkcs import NOPKCS
+from pkcs import PKCS
 
 
-class RESTful(NOPKCS):
+class RESTful(NOPKCS, PKCS):
 
-    def __init__(self, url, session, keymngr):
+    def __init__(self, url, session, keymngr, crt=None, key=None):
         self.__url__ = url
         self.__session__ = session
         self.__keymngr__ = keymngr
+        self.__crt__ = crt
+        self.__key__ = key
 
     def bool2str(self, boolval):
         if boolval:
