@@ -17,7 +17,6 @@ class Users(object):
 
     def __init__(self, *args, **kwargs):
         super(Users, self).__init__(*args, **kwargs)
-        self.items = []
 
     def get_userid_by_email(self, email):
         ''' get userid by email '''
