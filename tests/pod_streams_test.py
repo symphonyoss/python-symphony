@@ -464,8 +464,8 @@ class Pod_Users_tests(unittest.TestCase):
         assert status_code == 200
         data = json.loads(response)
         for user in data['members']:
-            if user['userId'] == 8933531975689:
-                assert user['companyId'] == 131
+            if user['user']['userId'] == 8933531975689:
+                assert user['user']['companyId'] == 131
 
 
 if __name__ == '__main__':
