@@ -29,7 +29,7 @@ class Base(object):
         # test message
         req_args = '{ "message": "'"%s"'" }' % test_string
         # receive HTTP response code and response text
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
         # return the token
         return status_code, response
 
@@ -37,7 +37,7 @@ class Base(object):
         ''' create datafeed '''
         req_hook = 'agent/v1/datafeed/create'
         req_args = None
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
         # load json response as list
         datafeed = json.loads(response)
         # return the token
@@ -47,7 +47,7 @@ class Base(object):
         ''' get datafeed '''
         req_hook = 'agent/v1/datafeed/' + str(streamid) + '/read'
         req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        status_code, response = self.__rest__.PKCS_GET_query(req_hook, req_args)
         response = ast.literal_eval(response)
         return status_code, response
 
@@ -55,5 +55,5 @@ class Base(object):
         ''' send message to threadid/stream '''
         req_hook = 'agent/v2/stream/' + threadid + '/message/create'
         req_args = '{ "format": "%s", "message": "'"%s"'" }' % (msgFormat, message)
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
         return status_code, response

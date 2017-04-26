@@ -29,7 +29,13 @@ class Agent_tests(unittest.TestCase):
         self.__uri__ = "http://fake.pod/"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
-        self.agent = symphony.Agent(self.__uri__, self.__session__, self.__keymngr__)
+        self.__crt__ = "crt"
+        self.__key__ = "key"
+        self.agent = symphony.Agent(self.__uri__,
+                                    self.__session__,
+                                    self.__keymngr__,
+                                    self.__crt__,
+                                    self.__key__)
 
     def test_test_echo(self):
         ''' test agent.test_echo'''
