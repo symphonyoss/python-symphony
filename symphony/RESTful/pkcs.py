@@ -22,7 +22,8 @@ class PKCS(object):
     def PKCS_GET_query(self, req_hook, req_args):
         ''' Generic GET query method '''
         # GET request methods only require sessionTokens
-        headers = {'content-type': 'application/json'}
+        headers = {'content-type': 'application/json',
+                   'sessionToken': self.__session__}
 
         # HTTP GET query method using requests module
         try:
@@ -38,14 +39,16 @@ class PKCS(object):
                                         verify=True)
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return '500', 'Internal Error in RESTful.GET_query()'
+            return '500', 'Internal Error in PKCS_RESTful.GET_query()'
         # return the token
         return response.status_code, response.text
 
     def PKCS_POST_query(self, req_hook, req_args):
         ''' Generic POST query method '''
         # HTTP POST queries require keyManagerTokens and sessionTokens
-        headers = {'Content-Type': 'application/json'}
+        headers = {'Content-Type': 'application/json',
+                   'sessionToken': self.__session__,
+                   'keyManagerToken': self.__keymngr__}
 
         # HTTP POST query to keymanager authenticate API
         try:
@@ -62,6 +65,6 @@ class PKCS(object):
                                          verify=True)
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return '500', 'Internal Error in RESTful.POST_query()'
+            return '500', 'Internal Error in PKCS_RESTful.POST_query()'
         # return the token
         return response.status_code, response.text
