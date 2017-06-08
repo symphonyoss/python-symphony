@@ -13,7 +13,7 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import symphony
 
-from base import Base
+from .base import Base
 
 
 class Agent(Base):
