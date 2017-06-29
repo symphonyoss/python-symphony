@@ -25,13 +25,11 @@ class Base(object):
 
     def test_echo(self, test_string):
         ''' echo test '''
-        req_hook = 'agent/v1/util/echo'
-        # test message
-        req_args = '{ "message": "'"%s"'" }' % test_string
-        # receive HTTP response code and response text
-        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
-        # return the token
-        return status_code, response
+        response = self.__agent__.Util.post_v1_util_echo(sessionToken=self.__session__,
+                                                         keyManagerToken=self.__keymngr__,
+                                                         echoInput={"message": test_string}
+                                                         ).result()
+        return response
 
     def create_datafeed(self):
         ''' create datafeed '''
@@ -53,6 +51,7 @@ class Base(object):
 
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
+        # using deprecated v3 message create because of bug in codegen of v4 ( multipart/form-data )
         response = self.__agentdepr__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
                                                                                  keyManagerToken=self.__keymngr__,
                                                                                  sid=threadid,
