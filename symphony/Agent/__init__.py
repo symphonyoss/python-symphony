@@ -24,6 +24,6 @@ class Agent(Base):
         self.__keymngr__ = keymngr
         try:
             CG = symphonybinding.SymCodegen()
-            self.__agent__, self.__agentdepr__ = CG.agent_cg(self.__url__)
+            self.__agent__ = CG.agent_cg(self.__url__)
         except Exception as err:
             print err

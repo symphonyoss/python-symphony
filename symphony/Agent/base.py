@@ -43,10 +43,10 @@ class Base(object):
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
         # using deprecated v3 message create because of bug in codegen of v4 ( multipart/form-data )
-        response, status_code = self.__agentdepr__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
-                                                                                              keyManagerToken=self.__keymngr__,
-                                                                                              sid=threadid,
-                                                                                              message={"format": msgFormat,
-                                                                                              "message": message}
-                                                                                              ).result()
+        response, status_code = self.__agent__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
+                                                                                          keyManagerToken=self.__keymngr__,
+                                                                                          sid=threadid,
+                                                                                          message={"format": msgFormat,
+                                                                                          "message": message}
+                                                                                          ).result()
         return status_code, response
