@@ -57,7 +57,7 @@ class Config:
             keymngr_token = auth.get_keymanager_token()
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
-            agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token, symphony_crt, symphony_key)
+            agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
             # instantiate pod methods
             pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
 

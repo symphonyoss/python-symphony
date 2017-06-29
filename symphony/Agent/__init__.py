@@ -18,12 +18,10 @@ from .base import Base
 
 class Agent(Base):
 
-    def __init__(self, url, session, keymngr, crt, key):
+    def __init__(self, url, session, keymngr):
         self.__url__ = url
         self.__session__ = session
         self.__keymngr__ = keymngr
-        self.__crt__ = crt
-        self.__key__ = key
         try:
             CG = symphonybinding.SymCodegen()
             self.__agent__, self.__agentdepr__ = CG.agent_cg(self.__url__)
