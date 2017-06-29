@@ -18,36 +18,35 @@ class Base(object):
 
     def test_echo(self, test_string):
         ''' echo test '''
-        response = self.__agent__.Util.post_v1_util_echo(sessionToken=self.__session__,
-                                                         keyManagerToken=self.__keymngr__,
-                                                         echoInput={"message": test_string}
-                                                         ).result()
-        return response
+        response, status_code = self.__agent__.Util.post_v1_util_echo(sessionToken=self.__session__,
+                                                                      keyManagerToken=self.__keymngr__,
+                                                                      echoInput={"message": test_string}
+                                                                      ).result()
+        return status_code, response
 
     def create_datafeed(self):
         ''' create datafeed '''
-        response = self.__agent__.Datafeed.post_v4_datafeed_create(sessionToken=self.__session__,
-                                                                   keyManagerToken=self.__keymngr__
-                                                                   ).result()
+        response, status_code = self.__agent__.Datafeed.post_v4_datafeed_create(sessionToken=self.__session__,
+                                                                                keyManagerToken=self.__keymngr__
+                                                                                ).result()
         # return the token
-        return response['id']
+        return status_code, response['id']
 
     def read_datafeed(self, datafeed_id):
         ''' get datafeed '''
-        response = self.__agent__.Datafeed.get_v4_datafeed_id_read(sessionToken=self.__session__,
-                                                                   keyManagerToken=self.__keymngr__,
-                                                                   id=datafeed_id
-                                                                   ).result()
-        return response
-        # return status_code, response
+        response, status_code = self.__agent__.Datafeed.get_v4_datafeed_id_read(sessionToken=self.__session__,
+                                                                                keyManagerToken=self.__keymngr__,
+                                                                                id=datafeed_id
+                                                                                ).result()
+        return status_code, response
 
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
         # using deprecated v3 message create because of bug in codegen of v4 ( multipart/form-data )
-        response = self.__agentdepr__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
-                                                                                 keyManagerToken=self.__keymngr__,
-                                                                                 sid=threadid,
-                                                                                 message={"format": msgFormat,
-                                                                                 "message": message}
-                                                                                 ).result()
-        return response
+        response, status_code = self.__agentdepr__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
+                                                                                              keyManagerToken=self.__keymngr__,
+                                                                                              sid=threadid,
+                                                                                              message={"format": msgFormat,
+                                                                                              "message": message}
+                                                                                              ).result()
+        return status_code, response
