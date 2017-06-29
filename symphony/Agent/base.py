@@ -10,17 +10,11 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-# import ast
-import unicodedata
-
 
 class Base(object):
 
     def __init__(self, *args, **kwargs):
         super(Base, self).__init__(*args, **kwargs)
-
-    def remove_control_characters(self, s):
-        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 
     def test_echo(self, test_string):
         ''' echo test '''
@@ -40,7 +34,6 @@ class Base(object):
 
     def read_datafeed(self, datafeed_id):
         ''' get datafeed '''
-        # response = ast.literal_eval(response)
         response = self.__agent__.Datafeed.get_v4_datafeed_id_read(sessionToken=self.__session__,
                                                                    keyManagerToken=self.__keymngr__,
                                                                    id=datafeed_id
