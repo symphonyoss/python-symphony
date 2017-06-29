@@ -53,7 +53,10 @@ class Base(object):
 
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
-        req_hook = 'agent/v2/stream/' + threadid + '/message/create'
-        req_args = '{ "format": "%s", "message": "'"%s"'" }' % (msgFormat, message)
-        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
-        return status_code, response
+        response = self.__agentdepr__.Messages.post_v3_stream_sid_message_create(sessionToken=self.__session__,
+                                                                                 keyManagerToken=self.__keymngr__,
+                                                                                 sid=threadid,
+                                                                                 message={"format": msgFormat,
+                                                                                 "message": message}
+                                                                                 ).result()
+        return response
