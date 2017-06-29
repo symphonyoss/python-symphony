@@ -10,8 +10,7 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import ast
-import json
+# import ast
 import unicodedata
 
 
@@ -33,21 +32,21 @@ class Base(object):
 
     def create_datafeed(self):
         ''' create datafeed '''
-        req_hook = 'agent/v1/datafeed/create'
-        req_args = None
-        status_code, response = self.__rest__.PKCS_POST_query(req_hook, req_args)
-        # load json response as list
-        datafeed = json.loads(response)
+        response = self.__agent__.Datafeed.post_v4_datafeed_create(sessionToken=self.__session__,
+                                                                   keyManagerToken=self.__keymngr__
+                                                                   ).result()
         # return the token
-        return status_code, datafeed['id']
+        return response['id']
 
-    def read_datafeed(self, streamid):
+    def read_datafeed(self, datafeed_id):
         ''' get datafeed '''
-        req_hook = 'agent/v1/datafeed/' + str(streamid) + '/read'
-        req_args = None
-        status_code, response = self.__rest__.PKCS_GET_query(req_hook, req_args)
-        response = ast.literal_eval(response)
-        return status_code, response
+        # response = ast.literal_eval(response)
+        response = self.__agent__.Datafeed.get_v4_datafeed_id_read(sessionToken=self.__session__,
+                                                                   keyManagerToken=self.__keymngr__,
+                                                                   id=datafeed_id
+                                                                   ).result()
+        return response
+        # return status_code, response
 
     def send_message(self, threadid, msgFormat, message):
         ''' send message to threadid/stream '''
