@@ -36,9 +36,10 @@ class Users(object):
 
     def user_presence(self, userid):
         ''' check on presence of a user '''
-        req_hook = 'pod/v2/user/' + str(userid) + '/presence'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.Presence.get_v2_user_uid_presence(
+            sessionToken=self.__session__,
+            uid=userid
+        ).result()
         return status_code, response
 
     def list_features(self):
