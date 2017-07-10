@@ -20,9 +20,10 @@ class Users(object):
 
     def get_userid_by_email(self, email):
         ''' get userid by email '''
-        req_hook = 'pod/v1/user'
-        req_args = '?email=' + email
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.Users.get_v2_user(
+            sessionToken=self.__session__,
+            email=email
+        ).result()
         return status_code, response
 
     def get_user_id_by_user(self, username):
