@@ -40,19 +40,6 @@ class Users(object):
         ).result()
         return status_code, response
 
-    def list_features(self):
-        ''' list features the pod supports '''
-        req_hook = 'pod/v1/admin/system/features/list'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
-        return status_code, response
-
-    def user_feature_update(self, userid, req_args):
-        ''' update features by user id '''
-        req_hook = 'pod/v1/admin/user/' + str(userid) + '/features/update'
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        return status_code, response
-
     def search_user(self, search_str, search_filter, local):
         ''' add a user to a stream '''
         response, status_code = self.__pod__.Users.post_v1_user_search(
@@ -60,11 +47,4 @@ class Users(object):
             searchRequest={'query': search_str,
                            'filters': search_filter}
         ).result()
-        return status_code, response
-
-    def list_apps(self):
-        ''' list apps '''
-        req_hook = 'pod/v1/admin/app/entitlement/list'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
         return status_code, response

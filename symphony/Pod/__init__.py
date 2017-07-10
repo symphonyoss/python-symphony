@@ -17,9 +17,11 @@ from .users import Users
 from .streams import Streams
 from .groups import Groups
 from .connections import Connections
+from .admin import Admin
 from .base import Base
 
-class Pod(Base, Users, Streams, Groups, Connections):
+
+class Pod(Base, Users, Streams, Groups, Connections, Admin):
 
     def __init__(self, url, session, keymngr):
         self.__url__ = url
