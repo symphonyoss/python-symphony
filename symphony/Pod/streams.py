@@ -39,13 +39,6 @@ class Streams(object):
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
         return status_code, response
 
-    def create_stream_ni(self, user_ids):
-        ''' create a stream in a non-inclusive manner '''
-        req_hook = 'pod/v1/admin/im/create'
-        req_args = json.dumps(user_ids)
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        return status_code, response
-
     def create_room(self, room_definition):
         ''' create's a room '''
         req_hook = 'pod/v2/room/create'
@@ -122,13 +115,6 @@ class Streams(object):
     def stream_info(self, stream_id):
         ''' get stream info '''
         req_hook = 'pod/v1/streams/' + stream_id + '/info'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
-        return status_code, response
-
-    def stream_members(self, stream_id):
-        ''' get stream members '''
-        req_hook = 'pod/v1/admin/stream/' + stream_id + '/membership/list'
         req_args = None
         status_code, response = self.__rest__.GET_query(req_hook, req_args)
         return status_code, response

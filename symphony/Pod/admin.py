@@ -38,3 +38,17 @@ class Admin(object):
             sessionToken=self.__session__
         ).result()
         return status_code, response
+
+    def create_stream_ni(self, user_ids):
+        ''' create a stream in a non-inclusive manner '''
+        req_hook = 'pod/v1/admin/im/create'
+        req_args = json.dumps(user_ids)
+        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        return status_code, response
+
+    def stream_members(self, stream_id):
+        ''' get stream members '''
+        req_hook = 'pod/v1/admin/stream/' + stream_id + '/membership/list'
+        req_args = None
+        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        return status_code, response
