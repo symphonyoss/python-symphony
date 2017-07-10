@@ -39,11 +39,13 @@ class Admin(object):
         ).result()
         return status_code, response
 
-    def create_stream_ni(self, user_ids):
+    def create_stream_ni(self, payload):
         ''' create a stream in a non-inclusive manner '''
-        req_hook = 'pod/v1/admin/im/create'
-        req_args = json.dumps(user_ids)
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        response, status_code = self.__pod__.Streams.post_v2_room_create(
+            sessionToken=self.__session__,
+            # V2RoomAttributes
+            payload=payload
+        ).result()
         return status_code, response
 
     def stream_members(self, stream_id):
