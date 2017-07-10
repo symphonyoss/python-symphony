@@ -30,9 +30,7 @@ class Connections(object):
 
     def connection_status(self, userid):
         ''' get connection status '''
-        req_hook = 'pod/v1/connection/' + userid + '/info'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.Connection.get_v1_connection_user_userId_info(sessionToken=self.__session__, userId=userid).result()
         return status_code, response
 
     def accept_connection(self, userid):
