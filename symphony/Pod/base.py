@@ -18,5 +18,7 @@ class Base(object):
 
     def sessioninfo(self):
         ''' session info '''
-        response, status_code = self.__pod__.Session.get_v2_sessioninfo(sessionToken=self.__session__).result()
+        response, status_code = self.__pod__.Session.get_v2_sessioninfo(
+            sessionToken=self.__session__
+        ).result()
         return status_code, response

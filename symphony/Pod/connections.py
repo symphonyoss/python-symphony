@@ -18,19 +18,27 @@ class Connections(object):
 
     def sessioninfo(self):
         ''' session info '''
-        response, status_code = self.__pod__.Session.get_v2_sessioninfo(sessionToken=self.__session__).result()
+        response, status_code = self.__pod__.Session.get_v2_sessioninfo(
+            sessionToken=self.__session__
+        ).result()
         return status_code, response
 
     def list_connections(self, status=None):
         ''' list connections '''
         if status is None:
             status = 'ALL'
-        response, status_code = self.__pod__.Connection.get_v1_connection_list(sessionToken=self.__session__, status=status).result()
+        response, status_code = self.__pod__.Connection.get_v1_connection_list(
+            sessionToken=self.__session__,
+            status=status
+        ).result()
         return status_code, response
 
     def connection_status(self, userid):
         ''' get connection status '''
-        response, status_code = self.__pod__.Connection.get_v1_connection_user_userId_info(sessionToken=self.__session__, userId=userid).result()
+        response, status_code = self.__pod__.Connection.get_v1_connection_user_userId_info(
+            sessionToken=self.__session__,
+            userId=userid
+        ).result()
         return status_code, response
 
     def accept_connection(self, userid):
