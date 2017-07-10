@@ -10,8 +10,6 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import json
-
 
 class Users(object):
 
@@ -57,13 +55,11 @@ class Users(object):
 
     def search_user(self, search_str, search_filter, local):
         ''' add a user to a stream '''
-        req_hook = 'pod/v1/user/search?local=' + local
-        req_args = {
-            "query": search_str,
-            "filters": search_filter
-        }
-        req_args = json.dumps(req_args)
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        response, status_code = self.__pod__.Users.post_v1_user_search(
+            sessionToken=self.__session__,
+            searchRequest={'query': search_str,
+                           'filters': search_filter}
+        ).result()
         return status_code, response
 
     def list_apps(self):
