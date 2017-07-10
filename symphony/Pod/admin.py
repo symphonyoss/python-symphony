@@ -34,7 +34,7 @@ class Admin(object):
 
     def list_apps(self):
         ''' list apps '''
-        req_hook = 'pod/v1/admin/app/entitlement/list'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.AppEntitlement.get_v1_admin_app_entitlement_list(
+            sessionToken=self.__session__
+        ).result()
         return status_code, response
