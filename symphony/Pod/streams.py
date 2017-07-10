@@ -32,17 +32,26 @@ class Streams(object):
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
         return status_code, response
 
+    def create_room(self, payload):
+        ''' create a stream in a non-inclusive manner '''
+        response, status_code = self.__pod__.Streams.post_v2_room_create(
+            # V2RoomAttributes
+            payload=payload
+        ).result()
+        return status_code, response
+
+    def stream_info(self, stream_id):
+        ''' get stream info '''
+        response, status_code = self.__pod__.Streams.get_v2_room_id_info(
+            sessionToken=self.__session__,
+            id=stream_id
+        ).result()
+        return status_code, response
+
     def create_stream(self):
         ''' create a stream '''
         req_hook = 'pod/v1/im/create'
         req_args = None
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        return status_code, response
-
-    def create_room(self, room_definition):
-        ''' create's a room '''
-        req_hook = 'pod/v2/room/create'
-        req_args = json.dumps(room_definition)
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
         return status_code, response
 
@@ -51,13 +60,6 @@ class Streams(object):
         req_hook = 'pod/v2/room/' + str(stream_id) + '/update'
         req_args = json.dumps(room_definition)
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        return status_code, response
-
-    def room_info(self, stream_id):
-        ''' get info on room '''
-        req_hook = 'pod/v2/room/' + str(stream_id) + '/info'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
         return status_code, response
 
     def activate_stream(self, stream_id, status):
@@ -110,11 +112,4 @@ class Streams(object):
                      }
         req_args = json.dumps(json_query)
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        return status_code, response
-
-    def stream_info(self, stream_id):
-        ''' get stream info '''
-        req_hook = 'pod/v1/streams/' + stream_id + '/info'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
         return status_code, response
