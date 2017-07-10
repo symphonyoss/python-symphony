@@ -23,10 +23,13 @@ class Admin(object):
         ).result()
         return status_code, response
 
-    def user_feature_update(self, userid, req_args):
+    def user_feature_update(self, userid, payload):
         ''' update features by user id '''
-        req_hook = 'pod/v1/admin/user/' + str(userid) + '/features/update'
-        status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        response, status_code = self.__pod__.User.post_v1_admin_user_uid_features_update(
+            sessionToken=self.__session__,
+            uid=userid,
+            payload=payload
+        ).result()
         return status_code, response
 
     def list_apps(self):
