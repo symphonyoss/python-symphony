@@ -28,9 +28,10 @@ class Users(object):
 
     def get_user_id_by_user(self, username):
         ''' get user id by username '''
-        req_hook = 'pod/v1/user/name/' + username + '/get'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.Users.get_v2_user(
+            sessionToken=self.__session__,
+            username=username
+        ).result()
         return status_code, response
 
     def user_presence(self, userid):
