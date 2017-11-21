@@ -33,9 +33,7 @@ class Agent_tests(unittest.TestCase):
         self.__key__ = "key"
         self.agent = symphony.Agent(self.__uri__,
                                     self.__session__,
-                                    self.__keymngr__,
-                                    self.__crt__,
-                                    self.__key__)
+                                    self.__keymngr__)
 
     def test_test_echo(self):
         ''' test agent.test_echo'''
