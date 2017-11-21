@@ -29,8 +29,6 @@ class Agent_tests(unittest.TestCase):
         self.__uri__ = "http://fake.pod/"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
-        self.__crt__ = "crt"
-        self.__key__ = "key"
         self.agent = symphony.Agent(self.__uri__,
                                     self.__session__,
                                     self.__keymngr__)
