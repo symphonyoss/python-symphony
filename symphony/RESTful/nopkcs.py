@@ -17,25 +17,6 @@ import requests
 class NOPKCS(object):
 
     def __init__(self, *args, **kwargs):
-        super(NOPKCS, self).__init__(*args, **kwargs)#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-'''
-    Purpose:
-        Abstracted GET / POST calls
-'''
-
-__author__ = 'Matt Joyce'
-__email__ = 'matt@joyce.nyc'
-__copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
-
-import logging
-import requests
-
-
-class NOPKCS(object):
-
-    def __init__(self, *args, **kwargs):
         super(NOPKCS, self).__init__(*args, **kwargs)
 
     def GET_query(self, req_hook, req_args):

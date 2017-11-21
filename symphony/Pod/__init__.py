@@ -31,4 +31,4 @@ class Pod(Base, Users, Streams, Groups, Connections, Admin):
             CG = symphonybinding.SymCodegen()
             self.__pod__ = CG.pod_cg(self.__url__)
         except Exception as err:
-            print err
+            print (err)

@@ -26,4 +26,4 @@ class Agent(Base):
             CG = symphonybinding.SymCodegen()
             self.__agent__ = CG.agent_cg(self.__url__)
         except Exception as err:
-            print err
+            print (err)
