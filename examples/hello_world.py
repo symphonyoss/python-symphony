@@ -17,16 +17,16 @@ def main():
     # connect to pod
     try:
         agent, pod, symphony_sid = conn.connect()
-        print 'connected: %s' % symphony_sid
-    except:
-        print 'failed to connect!'
+        print ('connected: %s' % symphony_sid)
+    except Exception as error_str:
+        print (error_str)
     # main loop
     msgFormat = 'MESSAGEML'
-    message = '<messageML> <a href="🍔.🍔/🍔/">🍔.🍔/🍔</a> </messageML>'
+    message = '<messageML> hello world </messageML>'
     # send message
     try:
         status_code, retstring = agent.send_message(symphony_sid, msgFormat, message)
-        print "%s: %s" % (status_code, retstring)
+        print ("%s: %s") % (status_code, retstring)
     except Exception as pork:
         print(pork)
 
