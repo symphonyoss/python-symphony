@@ -16,18 +16,29 @@ class Connections(object):
     def __init__(self, *args, **kwargs):
         super(Connections, self).__init__(*args, **kwargs)
 
-    def list_connections(self):
+    def sessioninfo(self):
+        ''' session info '''
+        response, status_code = self.__pod__.Session.get_v2_sessioninfo(
+            sessionToken=self.__session__
+        ).result()
+        return status_code, response
+
+    def list_connections(self, status=None):
         ''' list connections '''
-        req_hook = 'pod/v1/connection/list?status=all'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        if status is None:
+            status = 'ALL'
+        response, status_code = self.__pod__.Connection.get_v1_connection_list(
+            sessionToken=self.__session__,
+            status=status
+        ).result()
         return status_code, response
 
     def connection_status(self, userid):
         ''' get connection status '''
-        req_hook = 'pod/v1/connection/' + userid + '/info'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        response, status_code = self.__pod__.Connection.get_v1_connection_user_userId_info(
+            sessionToken=self.__session__,
+            userId=userid
+        ).result()
         return status_code, response
 
     def accept_connection(self, userid):

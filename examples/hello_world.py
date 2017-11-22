@@ -13,22 +13,22 @@ import symphony
 
 def main():
     ''' main program loop '''
-    conn = symphony.Config('/etc/es-bot/es-bot.cfg')
+    conn = symphony.Config('es-bot.cfg')
     # connect to pod
     try:
         agent, pod, symphony_sid = conn.connect()
-        print 'connected: %s' % symphony_sid
-    except:
-        print 'failed to connect!'
+        print ('connected: %s' % symphony_sid)
+    except Exception as error_str:
+        print (error_str)
     # main loop
     msgFormat = 'MESSAGEML'
-    message = '<messageML> hello world. </messageML>'
+    message = '<messageML> hello world </messageML>'
     # send message
     try:
         status_code, retstring = agent.send_message(symphony_sid, msgFormat, message)
-        print "%s: %s" % (status_code, retstring)
-    except:
-        print(retstring)
+        print ("%s: %s") % (status_code, retstring)
+    except Exception as pork:
+        print(pork)
 
 
 if __name__ == "__main__":

@@ -29,13 +29,9 @@ class Agent_tests(unittest.TestCase):
         self.__uri__ = "http://fake.pod/"
         self.__session__ = "sessions"
         self.__keymngr__ = "keys"
-        self.__crt__ = "crt"
-        self.__key__ = "key"
         self.agent = symphony.Agent(self.__uri__,
                                     self.__session__,
-                                    self.__keymngr__,
-                                    self.__crt__,
-                                    self.__key__)
+                                    self.__keymngr__)
 
     def test_test_echo(self):
         ''' test agent.test_echo'''
@@ -54,7 +50,7 @@ class Agent_tests(unittest.TestCase):
     def test_create_datafeed(self):
         ''' test agent.create_datafeed '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v1/datafeed/create",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v4/datafeed/create",
                                body='{ "id": 78910 }',
                                status=200,
                                content_type='text/json')
@@ -67,7 +63,7 @@ class Agent_tests(unittest.TestCase):
     def test_read_datafeed(self):
         ''' test agent.read_datafeed '''
         # register response
-        httpretty.register_uri(httpretty.GET, self.__uri__ + "agent/v1/datafeed/datafeed_id/read",
+        httpretty.register_uri(httpretty.GET, self.__uri__ + "agent/v4/datafeed/datafeed_id/read",
                                body='[{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
                                        "timestamp": "1464627173769", \
                                        "v2messageType": "V2Message", \
@@ -94,7 +90,7 @@ class Agent_tests(unittest.TestCase):
     def test_send_message(self):
         ''' test agent.send_message '''
         # register response
-        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v2/stream/thread_id/message/create",
+        httpretty.register_uri(httpretty.POST, self.__uri__ + "agent/v3/stream/thread_id/message/create",
                                body='{"id": "9zJTiQBL98ZEPAkvtjcweH___qr9auZ9dA", \
                                       "timestamp": "1464627173769", \
                                       "v2messageType": "V2Message", \

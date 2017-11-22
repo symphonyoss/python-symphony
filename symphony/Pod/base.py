@@ -17,8 +17,8 @@ class Base(object):
         super(Base, self).__init__(*args, **kwargs)
 
     def sessioninfo(self):
-        ''' list apps '''
-        req_hook = 'pod/v1/sessioninfo'
-        req_args = None
-        status_code, response = self.__rest__.GET_query(req_hook, req_args)
+        ''' session info '''
+        response, status_code = self.__pod__.Session.get_v2_sessioninfo(
+            sessionToken=self.__session__
+        ).result()
         return status_code, response
