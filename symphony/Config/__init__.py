@@ -55,7 +55,6 @@ class Config:
             logging.info("AUTH ( session token ): %s" % session_token)
             # get keymanager token
             keymngr_token = auth.get_keymanager_token()
-            print symphony_agent_uri
             logging.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
             agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
