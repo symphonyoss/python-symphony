@@ -32,7 +32,7 @@ class Mml():
         for mention in mentions:
             mentions_c.append(mention['uid'])
         msg_string = soup.messageml.text.strip()
-        self.logger('%s : %s : %s' % (hashes_c, mentions_c, msg_string))
+        self.logger.debug('%s : %s : %s' % (hashes_c, mentions_c, msg_string))
         return hashes_c, mentions_c, msg_string
 
     def parse_msg(self, datafeed):
