@@ -34,3 +34,4 @@ class Pod(Base, Users, Streams, Groups, Connections, Admin):
             self.__pod__ = CG.pod_cg(self.__url__)
         except Exception as err:
             self.logger.error(err)
+            raise

@@ -32,15 +32,15 @@ class Auth():
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as err:
             self.logger.error(err)
-            return err
-        # load json response as list
-        data = json.loads(response.text)
-        self.logger.debug(data)
+            raise
         if response.status_code == 200:
+            # load json response as list
+            data = json.loads(response.text)
+            self.logger.debug(data)
             # grab token from list
             session_token = data['token']
         else:
-            session_token = 1
+            raise Exception('BAD HTTP STATUS: %s' % str(response.status_code))
         # return the token
         self.logger.debug(session_token)
         return session_token
@@ -53,15 +53,15 @@ class Auth():
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as err:
             self.logger.error(err)
-            return err
-        # load json response as list
-        data = json.loads(response.text)
-        self.logger.debug(data)
+            raise
         if response.status_code == 200:
+            # load json response as list
+            data = json.loads(response.text)
+            self.logger.debug(data)
             # grab token from list
             session_token = data['token']
         else:
-            session_token = 1
+            raise Exception('BAD HTTP STATUS: %s' % str(response.status_code))
         # return the token
         self.logger.debug(session_token)
         return session_token
