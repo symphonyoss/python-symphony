@@ -52,12 +52,11 @@ class Streams(object):
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
-    def create_stream(self):
+    def create_stream(self, uidList=[]):
         ''' create a stream '''
         req_hook = 'pod/v1/im/create'
-        req_args = None
+        req_args = json.dumps(uidList)
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
-        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def update_room(self, stream_id, room_definition):
