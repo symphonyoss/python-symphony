@@ -34,6 +34,25 @@ class Admin(object):
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
+    def get_user_avatar(self, userid):
+        ''' get avatar by user id '''
+        response, status_code = self.__pod__.User.get_v1_admin_user_uid_avatar(
+            sessionToken=self.__session,
+            uid=userid
+        ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
+        return status_code, response
+
+    def user_avatar_update(self, userid, payload):
+        ''' updated avatar by userid '''
+        response, status_code = self.__pod__.User.post_v1_admin_user_uid_avatar_update(
+            sessionToken=self.__session,
+            uid=userid,
+            payload=payload
+        ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
+        return status_code, response
+
     def list_apps(self):
         ''' list apps '''
         response, status_code = self.__pod__.AppEntitlement.get_v1_admin_app_entitlement_list(

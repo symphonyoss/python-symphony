@@ -58,3 +58,14 @@ class Base(object):
         ).result()
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
+
+    def read_stream(self, stream_id, since_epoch):
+        ''' get datafeed '''
+        response, status_code = self.__agent__.Messages.get_v4_stream_sid_message(
+            sessionToken=self.__session__,
+            keyManagerToken=self.__keymngr__,
+            sid=stream_id,
+            since=since_epoch
+        ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
+        return status_code, response
