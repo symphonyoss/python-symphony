@@ -32,6 +32,7 @@ class Auth():
                                      cert=(self.__crt__, self.__key__), verify=True)
         except requests.exceptions.RequestException as err:
             self.logger.error(err)
+            raise
         if response.status_code == 200:
             # load json response as list
             data = json.loads(response.text)
