@@ -12,7 +12,6 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import configparser
 import logging
-import sys
 import symphony
 
 
@@ -31,11 +30,12 @@ class Config:
             settings._interpolation = configparser.ExtendedInterpolation()
         except Exception as err:
             self.logger.error("Failed to instantiate config parser exception: %s" % err)
+            raise
         try:
             settings.read(self.__config__)
         except Exception as err:
             self.logger.error("Failed to read config file exception: %s" % err)
-            sys.exit(2)
+            raise
 
         # Connect to Symphony
         symphony_p12 = settings.get('symphony', 'symphony_p12')
@@ -65,6 +65,6 @@ class Config:
             self.logger.info("INSTANTIATION ( all objects successful)")
         except Exception as err:
             self.logger.error("Failed to authenticate and initialize: %s" % err)
-            return 'you', 'have', 'failed'
+            raise
         # return references and such
         return agent, pod, symphony_sid
