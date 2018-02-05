@@ -10,7 +10,6 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import logging
 import requests
 
 
@@ -35,8 +34,8 @@ class NOPKCS(object):
                 response = requests.get(self.__url__ + req_hook + str(req_args),
                                         headers=headers,
                                         verify=True)
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+        except requests.exceptions.RequestException as err:
+            self.logger.error(err)
             return '500', 'Internal Error in RESTful.GET_query()'
         # return the token
         return response.status_code, response.text
@@ -59,8 +58,8 @@ class NOPKCS(object):
                                          headers=headers,
                                          data=req_args,
                                          verify=True)
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+        except requests.exceptions.RequestException as err:
+            self.logger.error(err)
             return '500', 'Internal Error in RESTful.POST_query()'
         # return the token
         return response.status_code, response.text

@@ -10,14 +10,17 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 import tempfile
+import logging
+
 from OpenSSL import crypto
 
 
 class Crypt():
 
-    def __init__(self, symphony_p12, symphony_pwd):
+    def __init__(self, symphony_p12, symphony_pwd, logger=None):
         self.p12 = symphony_p12
         self.pwd = symphony_pwd
+        self.logger = logger or logging.getLogger(__name__)
 
     def write_tmpfile(self, string):
         fd, path = tempfile.mkstemp()

@@ -23,6 +23,7 @@ class Base(object):
             keyManagerToken=self.__keymngr__,
             echoInput={"message": test_string}
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def create_datafeed(self):
@@ -32,6 +33,7 @@ class Base(object):
             keyManagerToken=self.__keymngr__
         ).result()
         # return the token
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response['id']
 
     def read_datafeed(self, datafeed_id):
@@ -41,6 +43,7 @@ class Base(object):
             keyManagerToken=self.__keymngr__,
             id=datafeed_id
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def send_message(self, threadid, msgFormat, message):
@@ -53,4 +56,5 @@ class Base(object):
             message={"format": msgFormat,
                      "message": message}
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response

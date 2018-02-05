@@ -18,9 +18,10 @@ import symphony
 
 class Config:
 
-    def __init__(self, config):
+    def __init__(self, config, logger=None):
         ''' command line argument parsing '''
         self.__config__ = config
+        self.logger = logger or logging.getLogger(__name__)
 
     def connect(self):
         ''' instantiate objects / parse config file '''
@@ -29,11 +30,11 @@ class Config:
             settings = configparser.ConfigParser()
             settings._interpolation = configparser.ExtendedInterpolation()
         except Exception as err:
-            logging.error("Failed to instantiate config parser exception: %s" % err)
+            self.logger.error("Failed to instantiate config parser exception: %s" % err)
         try:
             settings.read(self.__config__)
         except Exception as err:
-            logging.error("Failed to read config file exception: %s" % err)
+            self.logger.error("Failed to read config file exception: %s" % err)
             sys.exit(2)
 
         # Connect to Symphony
@@ -52,18 +53,18 @@ class Config:
             auth = symphony.Auth(symphony_sessionauth_uri, symphony_keymanager_uri, symphony_crt, symphony_key)
             # get session token
             session_token = auth.get_session_token()
-            logging.info("AUTH ( session token ): %s" % session_token)
+            self.logger.info("AUTH ( session token ): %s" % session_token)
             # get keymanager token
             keymngr_token = auth.get_keymanager_token()
-            logging.info("AUTH ( key manager token ): %s" % keymngr_token)
+            self.logger.info("AUTH ( key manager token ): %s" % keymngr_token)
             # instantiate agent methods
             agent = symphony.Agent(symphony_agent_uri, session_token, keymngr_token)
             # instantiate pod methods
             pod = symphony.Pod(symphony_pod_uri, session_token, keymngr_token)
 
-            logging.info("INSTANTIATION ( all objects successful)")
+            self.logger.info("INSTANTIATION ( all objects successful)")
         except Exception as err:
-            logging.error("Failed to authenticate and initialize: %s" % err)
+            self.logger.error("Failed to authenticate and initialize: %s" % err)
             return 'you', 'have', 'failed'
         # return references and such
         return agent, pod, symphony_sid

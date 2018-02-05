@@ -21,6 +21,7 @@ class Connections(object):
         response, status_code = self.__pod__.Session.get_v2_sessioninfo(
             sessionToken=self.__session__
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def list_connections(self, status=None):
@@ -31,6 +32,7 @@ class Connections(object):
             sessionToken=self.__session__,
             status=status
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def connection_status(self, userid):
@@ -39,6 +41,7 @@ class Connections(object):
             sessionToken=self.__session__,
             userId=userid
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def accept_connection(self, userid):
@@ -46,6 +49,7 @@ class Connections(object):
         req_hook = 'pod/v1/connection/accept'
         req_args = '{ "userId": %s }' % userid
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def create_connection(self, userid):
@@ -53,4 +57,5 @@ class Connections(object):
         req_hook = 'pod/v1/connection/create'
         req_args = '{ "userId": %s }' % userid
         status_code, response = self.__rest__.POST_query(req_hook, req_args)
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response

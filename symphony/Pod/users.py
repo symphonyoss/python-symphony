@@ -22,6 +22,7 @@ class Users(object):
             sessionToken=self.__session__,
             email=email
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def get_user_id_by_user(self, username):
@@ -30,6 +31,7 @@ class Users(object):
             sessionToken=self.__session__,
             username=username
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def user_presence(self, userid):
@@ -38,6 +40,7 @@ class Users(object):
             sessionToken=self.__session__,
             uid=userid
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def search_user(self, search_str, search_filter, local):
@@ -47,4 +50,5 @@ class Users(object):
             searchRequest={'query': search_str,
                            'filters': search_filter}
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response

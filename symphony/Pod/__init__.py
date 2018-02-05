@@ -12,6 +12,7 @@ __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 
 import symphonybinding
+import logging
 
 from .users import Users
 from .streams import Streams
@@ -23,12 +24,13 @@ from .base import Base
 
 class Pod(Base, Users, Streams, Groups, Connections, Admin):
 
-    def __init__(self, url, session, keymngr):
+    def __init__(self, url, session, keymngr, logger=None):
         self.__url__ = url
         self.__session__ = session
         self.__keymngr__ = keymngr
+        self.logger = logger or logging.getLogger(__name__)
         try:
             CG = symphonybinding.SymCodegen()
             self.__pod__ = CG.pod_cg(self.__url__)
         except Exception as err:
-            print (err)
+            self.logger.error(err)

@@ -10,7 +10,6 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-import logging
 import requests
 
 
@@ -37,10 +36,11 @@ class PKCS(object):
                                         headers=headers,
                                         cert=(self.__crt__, self.__key__),
                                         verify=True)
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+        except requests.exceptions.RequestException as err:
+            self.logger.error(err)
             return '500', 'Internal Error in PKCS_RESTful.GET_query()'
         # return the token
+        self.logger.debug('%s: %s' % (response.status_code, response.text))
         return response.status_code, response.text
 
     def PKCS_POST_query(self, req_hook, req_args):
@@ -63,8 +63,9 @@ class PKCS(object):
                                          data=req_args,
                                          cert=(self.__crt__, self.__key__),
                                          verify=True)
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
+        except requests.exceptions.RequestException as err:
+            self.logger.error(err)
             return '500', 'Internal Error in PKCS_RESTful.POST_query()'
         # return the token
+        self.logger.debug('%s: %s' % (response.status_code, response.text))
         return response.status_code, response.text

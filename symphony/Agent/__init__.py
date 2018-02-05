@@ -10,7 +10,7 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
-
+import logging
 import symphonybinding
 
 from .base import Base
@@ -18,12 +18,13 @@ from .base import Base
 
 class Agent(Base):
 
-    def __init__(self, url, session, keymngr):
+    def __init__(self, url, session, keymngr, logger=None):
         self.__url__ = url
         self.__session__ = session
         self.__keymngr__ = keymngr
+        self.logger = logger or logging.getLogger(__name__)
         try:
             CG = symphonybinding.SymCodegen()
             self.__agent__ = CG.agent_cg(self.__url__)
         except Exception as err:
-            print (err)
+            self.logger.error(err)

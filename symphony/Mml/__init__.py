@@ -8,11 +8,17 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
+import logging
+
 from bs4 import BeautifulSoup
 from datetime import datetime as date
 
 
 class Mml():
+
+    def __init__(self, logger=None):
+        ''' command line argument parsing '''
+        self.logger = logger or logging.getLogger(__name__)
 
     def parse_MML(self, mml):
         ''' parse the MML structure '''
@@ -26,6 +32,7 @@ class Mml():
         for mention in mentions:
             mentions_c.append(mention['uid'])
         msg_string = soup.messageml.text.strip()
+        self.logger.debug('%s : %s : %s' % (hashes_c, mentions_c, msg_string))
         return hashes_c, mentions_c, msg_string
 
     def parse_msg(self, datafeed):
@@ -48,4 +55,5 @@ class Mml():
                              'mentions': mentions,
                              'messageStr': msg_string}
             message_parsed.append(message_broke)
+        self.logger.debug(message_parsed)
         return message_parsed
