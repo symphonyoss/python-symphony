@@ -21,6 +21,7 @@ class Admin(object):
         response, status_code = self.__pod__.System.get_v1_admin_system_features_list(
             sessionToken=self.__session__
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def user_feature_update(self, userid, payload):
@@ -30,6 +31,7 @@ class Admin(object):
             uid=userid,
             payload=payload
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def list_apps(self):
@@ -37,6 +39,7 @@ class Admin(object):
         response, status_code = self.__pod__.AppEntitlement.get_v1_admin_app_entitlement_list(
             sessionToken=self.__session__
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
     def stream_members(self, stream_id):
@@ -45,4 +48,5 @@ class Admin(object):
             sessionToken=self.__session__,
             id=stream_id
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response

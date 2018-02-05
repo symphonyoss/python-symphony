@@ -21,4 +21,5 @@ class Base(object):
         response, status_code = self.__pod__.Session.get_v2_sessioninfo(
             sessionToken=self.__session__
         ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
