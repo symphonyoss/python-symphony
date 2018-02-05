@@ -8,11 +8,17 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
+import logging
+
 from bs4 import BeautifulSoup
 from datetime import datetime as date
 
 
 class Mml():
+
+    def __init__(self, logger=None):
+        ''' command line argument parsing '''
+        self.logger = logger or logging.getLogger(__name__)
 
     def parse_MML(self, mml):
         ''' parse the MML structure '''
