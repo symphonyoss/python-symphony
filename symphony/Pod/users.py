@@ -43,11 +43,21 @@ class Users(object):
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
-    def user_presence(self, userid):
+    def get_user_presence(self, userid):
         ''' check on presence of a user '''
         response, status_code = self.__pod__.Presence.get_v2_user_uid_presence(
             sessionToken=self.__session__,
             uid=userid
+        ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
+        return status_code, response
+
+    def set_user_presence(self, userid, presence):
+        ''' set presence of user '''
+        response, status_code = self.__pod__.Presence.post_v2_user_uid_presence(
+            sessionToken=self.__session__,
+            uid=userid,
+            presence=presence
         ).result()
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
