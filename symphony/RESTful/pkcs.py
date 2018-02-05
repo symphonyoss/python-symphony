@@ -40,6 +40,7 @@ class PKCS(object):
             self.logger.error(err)
             return '500', 'Internal Error in PKCS_RESTful.GET_query()'
         # return the token
+        self.logger.debug('%s: %s' % (response.status_code, response.text))
         return response.status_code, response.text
 
     def PKCS_POST_query(self, req_hook, req_args):
@@ -66,4 +67,5 @@ class PKCS(object):
             self.logger.error(err)
             return '500', 'Internal Error in PKCS_RESTful.POST_query()'
         # return the token
+        self.logger.debug('%s: %s' % (response.status_code, response.text))
         return response.status_code, response.text
