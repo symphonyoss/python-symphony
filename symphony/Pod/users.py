@@ -34,6 +34,15 @@ class Users(object):
         self.logger.debug('%s: %s' % (status_code, response))
         return status_code, response
 
+    def get_user_by_userid(self, userid):
+        ''' get user by user id '''
+        response, status_code = self.__pod__.Users.get_v2_user(
+            sessionToken=self.__session__,
+            uid=userid
+        ).result()
+        self.logger.debug('%s: %s' % (status_code, response))
+        return status_code, response
+
     def user_presence(self, userid):
         ''' check on presence of a user '''
         response, status_code = self.__pod__.Presence.get_v2_user_uid_presence(
