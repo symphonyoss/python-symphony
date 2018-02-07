@@ -8,27 +8,25 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2017, Symphony'
 
+import logging
 import symphony
+
+# to enable loggers... try something like this
+logging.getLogger("symphony").setLevel(logging.DEBUG)
+# logging.basicConfig(filename='bot.log', level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
 def main():
     ''' main program loop '''
-    conn = symphony.Config('es-bot.cfg')
+    conn = symphony.Config('corp-bot.cfg')
     # connect to pod
-    try:
-        agent, pod, symphony_sid = conn.connect()
-        print ('connected: %s' % symphony_sid)
-    except Exception as error_str:
-        print (error_str)
+    agent, pod, symphony_sid = conn.connect()
+    agent.test_echo('test')
     # main loop
     msgFormat = 'MESSAGEML'
-    message = '<messageML> hello world </messageML>'
+    message = '<messageML> hello world. </messageML>'
     # send message
-    try:
-        status_code, retstring = agent.send_message(symphony_sid, msgFormat, message)
-        print ("%s: %s") % (status_code, retstring)
-    except Exception as pork:
-        print(pork)
+    agent.send_message(symphony_sid, msgFormat, message)
 
 
 if __name__ == "__main__":
