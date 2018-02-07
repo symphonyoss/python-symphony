@@ -18,7 +18,7 @@ logging.getLogger("symphony").setLevel(logging.DEBUG)
 
 def main():
     ''' main program loop '''
-    conn = symphony.Config('corp-bot.cfg')
+    conn = symphony.Config('example-bot.cfg')
     # connect to pod
     agent, pod, symphony_sid = conn.connect()
     agent.test_echo('test')
