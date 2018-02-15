@@ -35,3 +35,7 @@ class Pod(Base, Users, Streams, Groups, Connections, Admin):
         except Exception as err:
             self.logger.error(err)
             raise
+
+    def get_session_token(self):
+        self.logger.warn('user exported session token: %s' % self.__session__)
+        return self.__session__
