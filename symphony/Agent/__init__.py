@@ -28,3 +28,7 @@ class Agent(Base):
             self.__agent__ = CG.agent_cg(self.__url__)
         except Exception as err:
             self.logger.error(err)
+
+    def get_keymanager_token(self):
+        self.logger.warn('user exported keymanager token: %s' % self.__keymngr__)
+        return self.__keymngr__
