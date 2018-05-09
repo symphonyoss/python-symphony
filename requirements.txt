@@ -6,7 +6,7 @@ pip
 
 # app dependencies
 requests
-python-symphony-binding
+python-symphony-binding==0.0.11
 pytz
 lxml
 configparser
