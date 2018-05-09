@@ -13,8 +13,10 @@ __email__ = 'matt@joyce.nyc'
 __copyright__ = 'Copyright 2016, Symphony Communication Services LLC'
 
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
-
+try:
+    from pip._internal.req import parse_requirements
+except ImportError:
+    from pip.req import parse_requirements
 
 # parse_requirements() returns generator of
 # pip.req.InstallRequirement objects
